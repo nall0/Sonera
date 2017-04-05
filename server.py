@@ -20,29 +20,31 @@ app.secret_key = 'stytjyntil468kyjnmti65468'
 # ------- Routes ---------
 @app.route('/')
 def index():
-  logged = 'logged' in session                                
-  if logged:
-    txt = 'Bonjour %s !' % session['id']
-  return render_template('index_sessions.html', message=txt, logged=logged)
+	addUser('Jesus', 'Christ', 'ninja') 
+	logged = 'logged' in session                                
+	if logged:
+		txt = 'Bonjour %s !' % session['id']
+	return render_template('index_sessions.html', message=txt, logged=logged)
 
 @app.route('/login', methods=['POST'])
 def login():
-  session['id'] = escape(request.form['id'])              
-  session['logged'] = True
-  return redirect('/')
+	session['id'] = escape(request.form['id'])              
+	session['logged'] = True
+	return redirect('/')
 
 @app.route('/logout')
 def logout():
-  session.clear()
-  return redirect('/')
+	session.clear()
+	return redirect('/')
 
 if __name__ == '__main__':
-  app.run(debug=True)
+	app.run(debug=True)
   
   
 # ------- Function addUser() --------
 def addUser(first_name, last_name, password):
-	connection.execute(users.insert())
+	connection.execute(users.insert(), [
+		{'first_name': first_name, 'last_name': last_name, 'password': password}])
 	
 
 connection.close() 
