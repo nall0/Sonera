@@ -11,5 +11,6 @@ First time:
 git clone https://github.com/nall0/Sonera (pour télécharger le dossier la 1ere fois)
 For each modif:
 git add *
+git commit -a
 git pull
 git push origin master
