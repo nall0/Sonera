@@ -6,7 +6,10 @@ Built by :
   Corentin Le Devedec
   Thibaut Giandomenico
 
-# Tests Github
-
-Hey
-Does it work ?
+# help for Git
+First time:
+git clone https://github.com/nall0/Sonera (pour télécharger le dossier la 1ere fois)
+For each modif:
+git add *
+git pull
+git push origin master
