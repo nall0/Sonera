@@ -27,9 +27,7 @@ app.secret_key = 'stytjyntil468kyjnmti65468'
 @app.route('/')
 def index():
 	logged = 'logged' in session                                
-	if logged:
-		txt = 'Bonjour %s !' % session['id']
-	return render_template('index_sessions.html', message=txt, logged=logged)
+	return render_template('sigin.html', logged=logged, )
 
 @app.route('/login', methods=['POST'])
 def login():
