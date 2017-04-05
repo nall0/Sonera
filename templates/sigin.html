@@ -7,45 +7,32 @@
 </head>
 
 <body>
-  <p class="text"> Bienvenue sur Sonera ! </p>
+  <p class="text"> Welcome on Sonera ! The social network for erasmus students all around the world ! </p>
 
   <li class="text"> Home </li>
 
   {% if logged %}
     <a href="/logout">[logout]</a>
+    {{ identifiant }}
 
   {% else %}
-    <li form action="/login" method="POST">
+    <form action="/login" method="POST">
       Sign In
       <p>
-          id :
-          <input type="text" name="id">
-          <input type="submit" value="send">
-
-          password :
-          <input type="text" name="password">
+          <input type="text" value="ID" name="id"> <br>
+          <input type="text" value="password" name="password"> <br>
           <input type="submit" value="send">
       </p>
 
         Sign Up
         <p>
-            First name:
-            <input type="text" name="first_name">
-            <input type="submit" value="send">
-            
-            Last name:
-            <input type="text" name="last_name">
-            <input type="submit" value="send">
-
-            password :
-            <input type="text" name="password">
+            <input type="text" value="first name" name="first_name"><br>
+            <input type="text" value="last name" name="last_name"><br>
+            <input type="text" value="password" name="password"><br>
             <input type="submit" value="send">
         </p>
 
   {% endif %}
-
-  </li>
-  <li class="text"> Sign Up </li>
 
 <!-- commentaire -->
 

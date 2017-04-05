@@ -26,20 +26,31 @@ app.secret_key = 'stytjyntil468kyjnmti65468'
 # ------- Routes ---------
 @app.route('/')
 def index():
-	logged = 'logged' in session                                
-	return render_template('sigin.html', logged=logged, )
+	logged = 'logged' in session   
+	if logged:
+		print(session['id'])                             
+	return render_template('sigin.html', logged=logged)
 
 @app.route('/login', methods=['POST'])
 def login():
 	session['id'] = escape(request.form['id'])
 	session['password'] = escape(request.form['password'])
 	session['logged'] = True
-	return redirect('/')
+	return render_template('sigin.html', logged=logged, identifiant=session['id'])
+	#return redirect('/')
 
 @app.route('/logout')
 def logout():
 	session.clear()
 	return redirect('/')
+	
+@app.route('/signup')
+def signup():
+	session['id'] = escape(request.form['id'])
+	session['password'] = escape(request.form['password'])
+	session['first_name'] = escape(request.form['first_name'])
+	session['last_name'] = escape(request.form['last_name'])
+	addUser(session['first_name'], session['last_name'], session['password'])
 
 if __name__ == '__main__':
 	app.run(debug=True)
