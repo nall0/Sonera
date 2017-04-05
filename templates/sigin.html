@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Sonera </title>
+
+</head>
+
+<body>
+  <p class="text"> Bienvenue sur Sonera ! </p>
+
+  <li class="text"> Home </li>
+
+  {% if logged %}
+    <a href="/logout">[logout]</a>
+
+  {% else %}
+    <li form action="/login" method="POST">
+      Sign In
+      <p>
+          id :
+          <input type="text" name="id">
+          <input type="submit" value="send">
+
+          password :
+          <input type="text" name="password">
+          <input type="submit" value="send">
+      </p>
+
+        Sign Up
+        <p>
+            id :
+            <input type="text" name="id">
+            <input type="submit" value="send">
+
+            password :
+            <input type="text" name="password">
+            <input type="submit" value="send">
+        </p>
+
+  {% endif %}
+
+  </li>
+  <li class="text"> Sign Up </li>
+
+<!-- commentaire -->
+
+</body>
+
+</html>
