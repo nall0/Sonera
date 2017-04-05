@@ -2,10 +2,20 @@ from flask import *
 from sqlalchemy import *
 from sqlalchemy.sql import *
 
+
 # ------- Function addUser() --------
 def addUser(first_name, last_name, password):
 	connection.execute(users.insert(), [
 		{'first_name': first_name, 'last_name': last_name, 'password': password}])
+	global nbUsers
+	nbUsers += 1
+# ------- Function countNbUsers -----
+def countNbUsers():
+	nbUsers = 0
+	for row in connection.execute(select([func.count(users.c.id)])):
+		nbUsers += 1
+	return nbUsers
+# -----------------------------------
 
 # -------- Create SQL tables ----------
 engine = create_engine('sqlite:///sonera.db', echo=True)   
@@ -17,7 +27,8 @@ users = Table('users', metadata,
             Column('password', String))
 metadata.create_all(engine)                               
 connection = engine.connect()
-addUser('Jesus', 'Christ', 'ninja') 
+nbUsers = countNbUsers()
+addUser('Jesus', 'Christ', 'ninja')
 
 # ------- Create Flask server ---------
 app = Flask(__name__)
@@ -26,18 +37,18 @@ app.secret_key = 'stytjyntil468kyjnmti65468'
 # ------- Routes ---------
 @app.route('/')
 def index():
+	txt = "Salut"
 	logged = 'logged' in session   
 	if logged:
-		print(session['id'])                             
-	return render_template('sigin.html', logged=logged)
+		txt = "Salut %s" % session['password']                             
+	return render_template('sigin.html', logged=logged, message=txt)
 
 @app.route('/login', methods=['POST'])
 def login():
 	session['id'] = escape(request.form['id'])
-	session['password'] = escape(request.form['password'])
+	session['password'] = escape(request.form['password_sin'])
 	session['logged'] = True
-	return render_template('sigin.html', logged=logged, identifiant=session['id'])
-	#return redirect('/')
+	return redirect('/')
 
 @app.route('/logout')
 def logout():
@@ -46,11 +57,11 @@ def logout():
 	
 @app.route('/signup')
 def signup():
-	session['id'] = escape(request.form['id'])
-	session['password'] = escape(request.form['password'])
+	session['password'] = escape(request.form['password_sup'])
 	session['first_name'] = escape(request.form['first_name'])
 	session['last_name'] = escape(request.form['last_name'])
 	addUser(session['first_name'], session['last_name'], session['password'])
+	session['id'] = nbUsers
 
 if __name__ == '__main__':
 	app.run(debug=True)
