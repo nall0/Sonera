@@ -40,7 +40,7 @@ def index():
 	txt = "Salut"
 	logged = 'logged' in session   
 	if logged:
-		txt = "Salut %s" % session['password']                             
+		txt = "Salut %s" % session['id']                             
 	return render_template('sigin.html', logged=logged, message=txt)
 
 @app.route('/login', methods=['POST'])
@@ -60,8 +60,8 @@ def signup():
 	session['password'] = escape(request.form['password_sigup'])
 	session['first_name'] = escape(request.form['first_name'])
 	session['last_name'] = escape(request.form['last_name'])
-	#addUser(session['first_name'], session['last_name'], session['password'])
-	#session['id'] = nbUsers
+	addUser(session['first_name'], session['last_name'], session['password'])
+	session['id'] = nbUsers
 	session['logged'] = True
 	return redirect('/')
 
