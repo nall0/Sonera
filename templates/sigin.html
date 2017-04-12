@@ -21,17 +21,20 @@
       Sign In
       <p>
           <input type="text" value="ID" name="id"> <br>
-          <input type="text" value="password" name="password_sin"> <br>
+          <input type="text" value="password" name="password_sigin"> <br>
           <input type="submit" value="send">
       </p>
-
+	</form>
+      
+	<form action="/signup" method="POST">
         Sign Up
         <p>
             <input type="text" value="first name" name="first_name"><br>
             <input type="text" value="last name" name="last_name"><br>
-            <input type="text" value="password" name="password_sup"><br>
+            <input type="text" value="password" name="password_sigup"><br>
             <input type="submit" value="send">
         </p>
+	</form>
 
   {% endif %}
 

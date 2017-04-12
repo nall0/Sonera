@@ -46,7 +46,7 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
 	session['id'] = escape(request.form['id'])
-	session['password'] = escape(request.form['password_sin'])
+	session['password'] = escape(request.form['password_sigin'])
 	session['logged'] = True
 	return redirect('/')
 
@@ -55,13 +55,15 @@ def logout():
 	session.clear()
 	return redirect('/')
 	
-@app.route('/signup')
+@app.route('/signup', methods=['POST'])
 def signup():
-	session['password'] = escape(request.form['password_sup'])
+	session['password'] = escape(request.form['password_sigup'])
 	session['first_name'] = escape(request.form['first_name'])
 	session['last_name'] = escape(request.form['last_name'])
-	addUser(session['first_name'], session['last_name'], session['password'])
-	session['id'] = nbUsers
+	#addUser(session['first_name'], session['last_name'], session['password'])
+	#session['id'] = nbUsers
+	session['logged'] = True
+	return redirect('/')
 
 if __name__ == '__main__':
 	app.run(debug=True)
