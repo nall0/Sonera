@@ -1,46 +1,46 @@
 from flask import *
 from sqlalchemy import *
+from sqlalchemy.orm import *
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import *
+from database import db_session
 
-
-# ------- Function addUser() --------
-def addUser(first_name, last_name, password):
-	connection.execute(users.insert(), [
-		{'first_name': first_name, 'last_name': last_name, 'password': password}])
-	global nbUsers
-	nbUsers += 1
-# ------- Function countNbUsers -----
+# -------- Create database and users table----------
+from database import init_db
+init_db()
+# --------------------------------------------------
+nbUsers=0
+# ------- Function countNbUsers --------------------
 def countNbUsers():
+	global nbUsers
 	nbUsers = 0
-	for row in connection.execute(select([func.count(users.c.id)])):
+	for row in User.query.all():
 		nbUsers += 1
 	return nbUsers
-# -----------------------------------
+# ------- Function addUser() -----------------------
+def addUser(first_name, last_name, password):
+	from database import db_session
+	from users import User
+	from users import User
+	global nbUsers
+	new_user = User(first_name, last_name, password)
+	db_session.add(new_user)
+	db_session.commit()
+	nbUsers += 1
+# --------------------------------------------------
 
-# -------- Create SQL tables ----------
-engine = create_engine('sqlite:///sonera.db', echo=True)   
-metadata = MetaData()                                     
-users = Table('users', metadata,                          
-            Column('id', Integer, autoincrement=True, primary_key=True),
-            Column('first_name', String),
-            Column('last_name', String),
-            Column('password', String))
-metadata.create_all(engine)                               
-connection = engine.connect()
-nbUsers = countNbUsers()
-addUser('Jesus', 'Christ', 'ninja')
-
-# ------- Create Flask server ---------
+# ------- Create Flask server ----------------------
 app = Flask(__name__)
 app.secret_key = 'stytjyntil468kyjnmti65468'  
 
-# ------- Routes ---------
+# ------- Routes ----------------------------------
 @app.route('/')
 def index():
+	addUser('Jesus', 'Christ', 'ninja')
 	txt = "Salut"
 	logged = 'logged' in session   
 	if logged:
-		txt = "Salut %s" % session['id']                             
+		txt = "Salut %d" % nbUsers                       
 	return render_template('sigin.html', logged=logged, message=txt)
 
 @app.route('/login', methods=['POST'])
@@ -67,6 +67,9 @@ def signup():
 
 if __name__ == '__main__':
 	app.run(debug=True)
-	
 
-connection.close() 
+# ----------------- Method to close session at the end of request or application -----------
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+

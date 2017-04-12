@@ -10,11 +10,8 @@
   <p class="text"> Welcome on Sonera ! The social network for erasmus students all around the world ! </p>
   <p>{{ message }}</p>
 
-  <li class="text"> Home </li>
-
   {% if logged %}
     <a href="/logout">[logout]</a>
-    {{ identifiant }}
 
   {% else %}
     <form action="/login" method="POST">
