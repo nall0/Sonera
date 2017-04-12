@@ -1,0 +1,155 @@
+***********************************************************************************************
+***********************************************************************************************
+********************************************ANGULAR********************************************
+***********************************************************************************************
+***********************************************************************************************
+
+$ est une convention qui nous permet de savoir qu'il s'agit effectivement de modules natifs à 
+Angular. 
+
+Le lien entre la vue HTML et le code JavaScript se fait au moyen de la directive ng-controller:
+
+HTML :
+<section ng-controller="headerCtrl">
+<h1>HEADER</h1>
+</section>
+
+JavaScript : 
+var app = angular.module("app", []);
+app.controller("headerCtrl", function($scope){
+    //...    
+});
+
+
+AngularJS utilise la notion de data-binding. Il s'agit d'un moyen de lier la partie vue à la 
+partie logique. En d'autres termes, grâce à cela, les éléments de notre code HTML seront liés 
+à notre contrôleur JavaScript. Le mot clef ng précède l'appelle de directive. Dans notre 
+cas, nous disons tout simplement de lier la valeur du champ input à la valeur de la variable 
+age  présent dans le code JavaScript. Au niveau de la balise <b> il y a un nouveau ng. Cette 
+fois nous utilisons la directive ng-bind a laquelle nous lions une fonction qui retourne la 
+chaîne de caractère "mineur ou majeur" en fonction de l'âge.
+
+HTML :
+<div ng-app="myApp">
+    <div ng-controller="exemple1Ctrl">
+        <input ng-model="age"/>
+        <span> Vous êtes <b ng-bind="majeurOrMineurText()"> </b> </span>
+</div>
+
+JavaScript :
+ar myApp = angular.module('myApp',[]);
+myApp.controller("exemple1Ctrl", function($scope){
+    $scope.age = 0;
+    $scope.majeurOrMineurText = function(){
+        return ($scope.age >= 18) ? "majeur" : "mineur";    
+    };
+});
+
+
+L'injection de dépendances
+
+Dans la théorie, l'injection de dépendances permet à des modules de ne pas se soucier de 
+l'instanciation des modules dont ils dépendent. Il suffit d'appeler les dépendances et 
+Angular se charge de les instancier et de les injecter pour nous.
+Utilité :
+	- La simplicité.On a plus à se soucier du comment instancier les modules que vous 
+	 utilisez. Cela suit le principe du "least knowledge". Lorsqu'on développee quelque 
+	  chose, on n'a pas envie de se soucier des autres composants, on veut juste les 
+	  utiliser !
+
+	- La fiabilité. Lorsque votre module est chargé, on a la certitude que toutes ses 
+	  dépendances sont chargées et que on a la possibilité de les utiliser.
+
+    	- La réutilisabilité. Il s'agit d'un point très important. Lorsqu'on développe des 
+	  services permettant par exemple de faire des conversions de dates, il y a fort à 
+	  parier que vous souhaiteriez pouvoir réutiliser ce module dans d'autres projets. 
+	  L'injection de dépendances permet donc d'inciter les développeurs à créer de petits 
+	  modules unitaires et à les assembler par la suite pour créer des systèmes plus 
+	 conséquents.
+
+    	- Les tests. C'est un point extrêmement important.Si le module que vous souhaitez 
+	  tester possède 10 dépendances, il est assez embêtant d'avoir à instancier les 10 
+	  modules afin de pouvoir juste tester notre module. À la place, nous allons dire au 
+	  système d'utiliser des mocks (des bouchons) qui vont se comporter comme nos 
+	  dépendances.
+
+$SCOPE
+
+$scope constitue une dépendance de notre contrôleur. Il s'agit du mécanisme couramment 
+utilisé par Angular afin d'exposer le modèle à la vue. En d'autres termes, le data-binding 
+se fait grâce à cet objet $scope. Toute donnée qui n'est pas attachée à $scope n'appartient 
+pas au modèle et ne peut donc pas être exposée à la vue. Il faut vraiment voir ce $scope 
+comme le contexte courant dans lequel vous pouvez agir. Chaque contrôleur possédera son 
+propre objet $scope et donc son propre contexte.
+
+$WATCH
+Il s'agit d'une fonction attachée à $scope qui va vous permettre d'observer certaines 
+propriétés de votre modèle et de déclencher des opérations lorsque la valeur de ces 
+propriétés changent. La spécification de la fonction est la suivante :
+
+	$watch(watchFn, watchAction, deepWatch)
+ 
+Les paramètres :
+
+	- watchFn : la propriété de votre modèle que vous souhaitez observer. Ce paramètre 
+	  peut-être soit une fonction, soit une expression.
+
+    	- watchAction : fonction ou expression qui sera appelée lorsque watchFn change.
+
+	- deepWatch : ce paramètre est optionnel. Il s'agit d'un booléen qui lorsqu'il est 
+	  vrai indique à Angular qu'il doit déclencher watchAction lorsque les sous-
+	propriétés d'un objet changent. Ce paramètre est pratique lorsque vous souhaitez 
+	examiner l'ensemble des propriétés d'un tableau ou d'un objet.
+
+LES DIRECTIVES
+
+Les directives sont utilisées lorsque l'on souhaite modifier ou transformer le DOM 
+(Document Object Model). Angular fournit un certain nombre de directives. En voilà
+quelques unes : 
+	- ngController : directive permettant d'attacher un contrôleur à la vue
+
+	- ngRepeat : directive permettant de répéter un template pour chaque élément 
+	  d'une collection.
+
+	- ngModel : directive permettant de lier les input, textarea ou select à une 
+	  propriété du contexte actuel.
+
+	- ngApp : Cette directive permet tout simplement d'initialiser notre application. 
+	  On la place au niveau de notre balise body ou html, et on lui donne le nom de 
+	  notre application.
+
+CREER UNE DIRECTIVE
+
+une directive qu'on devra surement créer concerne la mise en attente de l'utilisateur 
+lorsque qu'il a réalisé une action qui demande un peu de temps. Par exemple, lors du 
+chargement de votre page, ça pourrait être sympa d'afficher un curseur de chargement... 
+Je pense que ça se fait au moyen d'une directive qu'il vous faudra créer.
+
+Lorsque on souhaite appeler notre directive dans votre vue, il faut utiliser la syntaxe 
+suivante :
+
+	namespace-directiveName
+
+Ainsi, si je crée la directive loading, mon module JavaScript s'appellera myLoading et 
+je pourrai l'appeler dans mon code HTML par le nom my-loading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
