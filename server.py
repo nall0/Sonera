@@ -5,10 +5,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import *
 from database import db_session
 
-# -------- Create database and users table----------
-from database import init_db
-init_db()
-# --------------------------------------------------
 nbUsers=0
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -21,12 +17,16 @@ def countNbUsers():
 def addUser(first_name, last_name, password):
 	from database import db_session
 	from users import User
-	from users import User
 	global nbUsers
 	new_user = User(first_name, last_name, password)
 	db_session.add(new_user)
 	db_session.commit()
 	nbUsers += 1
+# --------------------------------------------------
+
+# -------- Create database and users table----------
+from database import init_db
+init_db()
 # --------------------------------------------------
 
 # ------- Create Flask server ----------------------
@@ -36,12 +36,13 @@ app.secret_key = 'stytjyntil468kyjnmti65468'
 # ------- Routes ----------------------------------
 @app.route('/')
 def index():
-	addUser('Jesus', 'Christ', 'ninja')
 	txt = "Salut"
-	logged = 'logged' in session   
+	logged = 'logged' in session  
+	from users import User 
+	list_users = User.query.all()
 	if logged:
 		txt = "Salut %d" % nbUsers                       
-	return render_template('sigin.html', logged=logged, message=txt)
+	return render_template('sigin.html', logged=logged, message=txt, users=list_users)
 
 @app.route('/login', methods=['POST'])
 def login():
