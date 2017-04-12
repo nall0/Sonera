@@ -12,7 +12,7 @@
 
 	{% if logged %}
 		{% for user in users %}
-			{{ user }}
+			{{ user }}<br>
 		{% endfor %}
 		<a href="/logout">[logout]</a>
 
@@ -32,6 +32,8 @@
 			<input type="text" value="first name" name="first_name"><br>
 			<input type="text" value="last name" name="last_name"><br>
 			<input type="text" value="password" name="password_sigup"><br>
+			You can say something about yourself :<br>
+			<input type="text" name="biography"><br>
 			<input type="submit" value="send">
 		</p>
 	</form>
