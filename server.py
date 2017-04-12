@@ -65,6 +65,11 @@ def signup():
 	session['logged'] = True
 	return redirect('/')
 
+@app.route('/home', methods=['POST'])
+def home():
+    
+    return render_template('home.html', first_name=, last_name=, , biography=)
+
 if __name__ == '__main__':
 	app.run(debug=True)
 
