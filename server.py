@@ -70,7 +70,7 @@ def signup():
 	addUser(session['first_name'], session['last_name'], session['password'], session['biography'])
 	session['id'] = nbUsers
 	session['logged'] = True
-	return redirect('/')
+	return redirect('/home')
 
 @app.route('/profile0')
 def profile0():
@@ -79,7 +79,7 @@ def profile0():
 	bio = current_user.biography
 	return render_template('profile0.html', first_name=session['first_name'], last_name=['last_name'], biography=bio)
 	
-@app.route('/home', methods=['POST'])
+@app.route('/home', methods=['POST', 'GET'])
 def home():
 	return render_template('home.html', first_name=session['first_name'], last_name=['last_name'])
 	
