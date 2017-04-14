@@ -8,29 +8,28 @@
 
 <body>
 	<p class="text"> Welcome on Sonera ! The social network for erasmus students all around the world ! </p>
-	<p>{{ message }}</p>
+	<p>{{ message }}
+	There are {{ nbUsers }} users on Sonera.</p>
 
-	{% if logged %}
-		{% for user in users %}
-			{{ user }}<br>
-		{% endfor %}
-		<a href="/logout">[logout]</a>
-
-	{% else %}
 	<form action="/login" method="POST">
-	Sign In
+	<strong>Sign In</strong>
 		<p>
-			<input type="text" value="ID" name="id"> <br>
-			<input type="text" value="password" name="password_sigin"> <br>
+			ID <br>
+			<input type="text" name="id"> <br>
+			Password <br>
+			<input type="text" name="password_sigin"> <br>
 			<input type="submit" value="send">
 		</p>
 	</form>
       
 	<form action="/signup" method="POST">
-		Sign Up
+		<strong>Sign Up</strong>
 		<p>
-			<input type="text" value="first name" name="first_name"><br>
-			<input type="text" value="last name" name="last_name"><br>
+			First name <br>
+			<input type="text" name="first_name"><br>
+			Last name <br>
+			<input type="text" name="last_name"><br>
+			Password <br>
 			<input type="text" value="password" name="password_sigup"><br>
 			You can say something about yourself :<br>
 			<input type="text" name="biography"><br>
@@ -38,7 +37,6 @@
 		</p>
 	</form>
 
-  {% endif %}
 
 <!-- commentaire -->
 

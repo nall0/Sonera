@@ -12,6 +12,7 @@ nbUsers=0
 # ------- Function countNbUsers --------------------
 def countNbUsers():
 	global nbUsers
+	from users import User
 	nbUsers = 0
 	for row in User.query.all():
 		nbUsers += 1
@@ -36,15 +37,15 @@ init_db()
 app = Flask(__name__)
 app.secret_key = 'stytjyntil468kyjnmti65468'  
 
+
 # ------- Routes ----------------------------------
 @app.route('/')
 def index():
-	logged = 'logged' in session  
-	from users import User 
-	list_users = User.query.all()
-	#if logged:
-		#return redirect('/home')                      
-	return render_template('sigin.html', logged=logged, users=list_users)
+	logged = 'logged' in session 
+	nbUsers = countNbUsers()
+	if logged:
+		return redirect('/home')                      
+	return render_template('sigin.html', logged=logged, nbUsers=nbUsers)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -52,8 +53,14 @@ def login():
 	session['password'] = escape(request.form['password_sigin'])
 	from users import User
 	current_user = User.query.filter(User.id == session['id']).first()
-	session['biography'] = current_user.biography
-	session['logged'] = True
+	if current_user == None:
+		return redirect('/')
+	else:
+		# appeller methode pour tester si le password est le bon
+		session['first_name'] = current_user.first_name
+		session['last_name'] = current_user.last_name
+		session['biography'] = current_user.biography
+		session['logged'] = True
 	return redirect('/')
 
 @app.route('/logout')
@@ -70,7 +77,7 @@ def signup():
 	addUser(session['first_name'], session['last_name'], session['password'], session['biography'])
 	session['id'] = nbUsers
 	session['logged'] = True
-	return redirect('/home')
+	return redirect('/')
 
 @app.route('/profile0')
 def profile0():
@@ -81,7 +88,7 @@ def profile0():
 	
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', first_name=session['first_name'], last_name=['last_name'])
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], id=session['id'])
 	
 
 
@@ -92,4 +99,5 @@ if __name__ == '__main__':
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
+
 

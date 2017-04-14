@@ -2,13 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Hello {{first_name}} {{last_name}} !</title>
+        <title>Sonera - Home</title>
     </head>
 
     <body>
-
-      <form action="/home" method="POST">
-          <strong> Search a student :</strong>
+		<p>Hello {{first_name}} {{last_name}} !
+		Your ID is {{ id }}. Don't forget it, you'll need it to login ! </p>
+		<form action="/home" method="POST">
+		<strong> Search a student :</strong>
         <p>
             <input type="text" value="ID" name="id">
             <input type="submit" value="search">
