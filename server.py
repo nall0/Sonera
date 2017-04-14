@@ -26,7 +26,17 @@ def addUser(first_name, last_name, password, biography):
 	db_session.add(new_user)
 	db_session.commit()
 	nbUsers += 1
+# ---------------- Methode which test the password ------------------------
+def pw_verification(password):
+	from users import User
+	current_user = User.query.filter(User.id == session['id']).first()
+	real_password = current_user.password
+	if real_password == password:
+		return True
+	else:
+		return False
 # --------------------------------------------------
+
 
 # -------- Create database and users table----------
 from database import init_db
@@ -55,8 +65,7 @@ def login():
 	current_user = User.query.filter(User.id == session['id']).first()
 	if current_user == None:
 		return redirect('/')
-	else:
-		# appeller methode pour tester si le password est le bon
+	elif pw_verification(session['password']):
 		session['first_name'] = current_user.first_name
 		session['last_name'] = current_user.last_name
 		session['biography'] = current_user.biography
@@ -89,7 +98,7 @@ def profile0():
 @app.route('/home', methods=['POST', 'GET'])
 def home():
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], id=session['id'])
-	
+# ------------------------------------------------------------------------------------------------	
 
 
 if __name__ == '__main__':
@@ -99,5 +108,6 @@ if __name__ == '__main__':
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
+    
 
 
