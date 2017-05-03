@@ -14,7 +14,7 @@ class User(Base):
 	school = Column(String)
 	gender = Column(String)
 
-	def __init__(self, pseudo=None, first_name=None, last_name=None, password=None, bio=None, g=None, c=None, d=None, s=None):
+	def __init__(self, pseudo=None, first_name=None, last_name=None, password=None, bio=None, g=None, c=None, s=None):
 		self.first_name = first_name
 		self.last_name = last_name
 		self.password = password
@@ -22,7 +22,7 @@ class User(Base):
 		self.biography = bio
 		self.gender = g
 		self.country = c
-		self.dest = d
+		self.dest = None
 		self.school = s
 
 	def __repr__(self):
