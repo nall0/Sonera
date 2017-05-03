@@ -10,15 +10,28 @@ from database import db_session
 
 nbUsers=0
 userList=None
+resultFound=False
 
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
 	for row in User.query.all():
 		if row.email == email:
-			print("already used pseudo")
+			print("Email already used !")
 			return False
 	return True
+
+# --------- Function
+def userSearch(dest, country=None):
+	global userList
+	from users import User
+	if country == None:
+		userList = User.query.filter(User.dest == dest)
+		resultFound=True
+	else:
+		userList = User.query.filter(User.dest == dest and User.country == country)
+		resultFound=True
+
 
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -115,11 +128,11 @@ def profile():
 	current_user = User.query.filter(User.email == session['email']).first()
 	bio = current_user.biography
 	return render_template('profile0.html', first_name=session['first_name'], last_name=session['last_name'], biography=bio,
-		country=session['country'], school=session['school'], gender=session['gender'])
+		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
 @app.route('/editProfile')
 def editProfile():
-	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'])
+	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
 @app.route('/getNewInfos', methods=['POST', 'GET'])
 def getNewInfos():
@@ -151,7 +164,7 @@ def getSearch():
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'])
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], userList=userList, resultFound=resultFound)
 # ------------------------------------------------------------------------------------------------
 
 
