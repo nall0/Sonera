@@ -18,11 +18,11 @@ def countNbUsers():
 		nbUsers += 1
 	return nbUsers
 # ------- Function addUser() -----------------------
-def addUser(pseudo, first_name, last_name, password, biography):
+def addUser(pseudo, first_name, last_name, password, biography, g , c, dest, sch):
 	from database import db_session
 	from users import User
 	global nbUsers
-	new_user = User(pseudo, first_name, last_name, password, biography)
+	new_user = User(pseudo, first_name, last_name, password, biography, g, c, dest, sch)
 	db_session.add(new_user)
 	db_session.commit()
 	nbUsers += 1
@@ -70,6 +70,10 @@ def login():
 		session['first_name'] = current_user.first_name
 		session['last_name'] = current_user.last_name
 		session['biography'] = current_user.biography
+		session['gender'] = current_user.gender
+		session['country'] = current_user.country
+		session['dest'] = current_user.dest
+		session['school'] = current_user.school
 		session['logged'] = True
 	return redirect('/')
 
@@ -85,7 +89,11 @@ def signup():
 	session['first_name'] = escape(request.form['first_name'])
 	session['last_name'] = escape(request.form['last_name'])
 	session['biography'] = escape(request.form['biography'])
-	addUser(session['pseudo'], session['first_name'], session['last_name'], session['password'], session['biography'])
+	#session['gender'] = escape(request.form['gender'])
+	#session['country'] = escape(request.form['country'])
+	#session['dest'] = escape(request.form['dest'])
+	#session['country'] = escape(request.form['country'])
+	addUser(session['pseudo'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['dest'], session['school'])
 	session['id'] = nbUsers
 	session['logged'] = True
 	return redirect('/')
