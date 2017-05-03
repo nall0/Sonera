@@ -97,12 +97,13 @@ def signup():
 	session['logged'] = True
 	return redirect('/')
 
-@app.route('/profile0')
-def profile0():
+@app.route('/profile')
+def profile():
 	from users import User
-	current_user = User.query.filter(User.id == session['id']).first()
+	current_user = User.query.filter(User.pseudo == session['pseudo']).first()
 	bio = current_user.biography
-	return render_template('profile0.html', first_name=session['first_name'], last_name=['last_name'], biography=bio)
+	return render_template('profile0.html', first_name=session['first_name'], last_name=session['last_name'], biography=bio,
+		country=session['country'], school=session['school'], gender=session['gender'])
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
