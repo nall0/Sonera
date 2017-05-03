@@ -9,6 +9,16 @@ from database import db_session
 # website for SQLAlchemy+Flask (declarative base) : http://flask.pocoo.org/docs/0.12/patterns/sqlalchemy/
 
 nbUsers=0
+
+# ------- Function checkEmail --------------------
+def checkEmail(email):
+	from users import User
+	for row in User.query.all():
+		if row.email == email:
+			print("already used pseudo")
+			return False
+	return True
+
 # ------- Function countNbUsers --------------------
 def countNbUsers():
 	global nbUsers
@@ -92,9 +102,10 @@ def signup():
 	session['gender'] = escape(request.form['gender'])
 	session['country'] = escape(request.form['country'])
 	session['school'] = escape(request.form['school'])
-	addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'])
-	session['id'] = nbUsers
-	session['logged'] = True
+	if checkEmail(session['email']):
+		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'])
+		session['id'] = nbUsers
+		session['logged'] = True
 	return redirect('/')
 
 @app.route('/profile')
