@@ -120,6 +120,8 @@ quelques unes :
 
 CREER UNE DIRECTIVE
 
+Un composant angular, est un répertoire qui déclare la structure d'une balise html. 
+Elle déclare donc le controlleur et la vue associée à la directive.
 une directive qu'on devra surement créer concerne la mise en attente de l'utilisateur 
 lorsque qu'il a réalisé une action qui demande un peu de temps. Par exemple, lors du 
 chargement de votre page, ça pourrait être sympa d'afficher un curseur de chargement... 
@@ -134,6 +136,10 @@ Ainsi, si je crée la directive loading, mon module JavaScript s'appellera myLoa
 je pourrai l'appeler dans mon code HTML par le nom my-loading.
 
 
+
+
+Un fournisseur de service que nous allons écrire est le Filter. Il permet de traiter un 
+résultat affiché par un filtre. Ceci fonctionne de manière similaire au pipe '|' unix.
 
 
 
