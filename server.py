@@ -106,6 +106,28 @@ def profile():
 		country=session['country'], school=session['school'], gender=session['gender'])
 
 @app.route('/editProfile')
+def editProfile():
+	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'])
+
+@app.route('/getNewInfos', methods=['POST', 'GET'])
+def getNewInfos():
+	from users import User
+	current_user = User.query.filter(User.email == session['email']).first()
+	session['password'] = escape(request.form['password_sigup'])
+	current_user.password=session['password']
+	session['first_name'] = escape(request.form['first_name'])
+	current_user.first_name=session['first_name']
+	session['last_name'] = escape(request.form['last_name'])
+	current_user.last_name=session['last_name']
+	session['biography'] = escape(request.form['biography'])
+	current_user.biography=session['biography']
+	session['country'] = escape(request.form['country'])
+	current_user.country=session['country']
+	session['dest'] = escape(request.form['dest'])
+	current_user.dest=session['dest']
+	session['school'] = escape(request.form['school'])
+	current_user.school=session['school']
+	return redirect('/profile')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
