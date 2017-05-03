@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit {{first_name}} {{last_name}}'s profile</title>
+    </head>
+
+    <form action="/getNewInfos" method="POST">
+    <body>
+		<p> Please enter your personnal informations below <br>
+      First name <br>
+      <input type="text" value={{first_name}} name="first_name"><br>
+      Last name <br>
+      <input type="text" value={{last_name}} name="last_name"><br>
+      Password <br>
+      <input type="password" value={{password}} name="password_sigup"><br>
+      Biography<br>
+      <input type="text" value={{biography}} name="biography"><br>
+      Country<br>
+      <input type="text" value={{country}} name="country"><br>
+      School<br>
+      <input type="text" value={{school}} name="school"><br>
+      Destination<br>
+      <input type="text" value={{dest}} name="dest"><br>
+      <input type="submit" value="submit">
+    </p>
+    <p> <a href="home">Return home without saving</a> </p>
+    </body>
+    </form>
+
+</html>

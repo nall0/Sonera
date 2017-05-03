@@ -7,19 +7,23 @@
 
     <body>
 		<p>Hello {{first_name}} {{last_name}} !
-		Your pseudo is {{ pseudo }}. Don't forget it, you'll need it to login ! </p>
-		<form action="/home" method="POST">
-		<strong> Search a student by pseudo :</strong>
+		Your email is {{ email }}. Don't forget it, you'll need it to login ! </p>
+    <p>My profile : <a href="profile" title="Profile"> Profile </a> </p>
+		<form action="/getSearch" method="POST">
+		<strong> Search a student by his/her destination and origin country (optionnal) :</strong>
         <p>
-            <input type="text" name="id">
+            <input type="text" name="search_dest">
+            <input type="text" name="search_country">
             <input type="submit" value="search">
         </p>
       </form>
 
     <strong>Results : </strong>
-        <p>
-        <a href="profileJesus.html" title="Jesus's Profile"> Jesus Christ </a>
-        <a href="profile0.html" title="Profile0"> Profile0 </a>
+        <p>{% if resultFound %}
+            {% for u in userList %}
+              {{u}}
+            {% endfor %}
+          {% endif %}
         </p>
 
     </body>
