@@ -7,9 +7,10 @@
 
     <body>
 		<p>Hello {{first_name}} {{last_name}} !
-		Your pseudo is {{ pseudo }}. Don't forget it, you'll need it to login ! </p>
+		Your email is {{ email }}. Don't forget it, you'll need it to login ! </p>
+    <p>My profile : <a href="profile" title="Profile"> Profile </a> </p>
 		<form action="/home" method="POST">
-		<strong> Search a student by pseudo :</strong>
+		<strong> Search a student by name :</strong>
         <p>
             <input type="text" name="id">
             <input type="submit" value="search">
@@ -18,8 +19,7 @@
 
     <strong>Results : </strong>
         <p>
-        <a href="profileJesus" title="Jesus's Profile"> Jesus Christ </a>
-        <a href="profile" title="Profile"> Profile </a>
+
         </p>
 
     </body>
