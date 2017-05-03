@@ -1,4 +1,5 @@
 var app = angular.module('myApp', [])
+
 app.controller('main-controller', ['$scope', function($scope)
 {
 

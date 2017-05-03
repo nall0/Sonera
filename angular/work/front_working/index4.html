@@ -15,13 +15,17 @@
 
 		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="js/jquery-birthday-picker.min.js"></script>
+
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="build/css/demo.css">
+
+		<script src="build/js/countrySelect.min.js"></script>
 
 		<!-- création de la boite pour se créer un compte -->
         <style type="text/css">
             .boxLeft
             {
-            	margin:100px auto;
+            	margin:50px auto;
                 width:500px;
                 border:1px solid #dedede;
                 border-radius:5px;
@@ -31,7 +35,7 @@
             }
             .boxRight
 			{
-				margin:100px auto;
+				margin:50px auto;
        			width:500px;
                 border:1px solid #dedede;
                 border-radius:5px;
@@ -46,38 +50,44 @@
         </style>
 
     <body data-ng-controller="main-controller" ng-controller="matchPassword">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="collapse navbar-collapse" id="oNavigation">
+				<ul class="nav navbar-nav">
+			  		<li><a href="#">Accueil</a></li>
+					<li><button href="#" type="button" class="btn btn-info navbar-btn" data-toggle="collapse" data-target="#button1">Sign In</button></li>
+					<li><button href="#" type="button" class="btn btn-info navbar-btn" data-toggle="collapse" data-target="#button2">Sign Up</button></li>
+				</ul>
+		  	</div>
+		</nav>
 		<div class="container">
-				<div class="boxRight">
+				<div id="button1" class="collapse">
+					<div class="boxRight">
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-				    <form name="frm" class="form">
+						<!--<form name="frm" class="form">
 						<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
-							<label for="s-nationality">Country:</label> <!-- label pour le titre de la case de dessous-->
-							<select id="s-nationality" class="form-control" required="required" data-ng-model="form.nationality" data-ng-options="country as country.name for country in countries"></select>
-						</div>
+							<!--<label for="s-nationality">Country:</label> <!-- label pour le titre de la case de dessous-->
+							<!--<select id="s-nationality" class="form-control" required="required" data-ng-model="form.nationality"></select>
+						</div> -->
 
-					<!--<div>
-					<form name="frm" class="form">
-						<div class="form-group">
-							<label for="s-nationality">Nationality:</label>
-							<br>
-								<input id="country_selector" type="text">
-								<label for="country_selector" style="display:none;">Select a country here...</label>
-							</br>
+						<div>
+							<form name="frm" class="form">
+								<div class="form-group">
+									<label for="s-nationality">Nationality:</label>
+									<br>
+										<input id="country_selector" type="text">
+										<label for="country_selector" style="display:none;"></label>
+									</br>
+								</div>
+								<div class="form-item" style="display:none;">
+									<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
+									<label for="country_selector_code"></label>
+								</div>
+							</form>
+							<!-- Load jQuery from CDN so can run immediately -->
+
+							<script>$("#country_selector").countrySelect({});</script>
 						</div>
-						<div class="form-item" style="display:none;">
-							<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
-							<label for="country_selector_code">...and the selected country code will be updated here</label>
-						</div>
-						</form>
-						<!-- Load jQuery from CDN so can run immediately -->
-						<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-						<script src="build/js/countrySelect.min.js"></script>
-						<script>
-							$("#country_selector").countrySelect({
-							});
-						</script>
-					</div> -->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 						<div class="form-group">
@@ -93,8 +103,8 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 						<div class="form-group">
-							<label for="tb-age">Age:</label>
-							<input type="tb-age" data-ng-model="form.age" class="form-control" type="number" data-ng-disabled="!form.firstName"/>
+							<label for="tb-school">Age:</label>
+							<input type="tb-school" data-ng-model="form.school" class="form-control" type="text" data-ng-disabled="!form.firstName"/>
 						</div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -165,8 +175,10 @@
 					<button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.age">Sign Up</button>
 				</div>
 		 	</div>
+			</div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+			<div id="button2" class="collapse">
 			<div class="boxLeft">
 			    <form name="frm" class="form">	
 					<div class="form-group" ng-class="{'has-error': registerForm.$dirty && registerForm.Email.$invalid, 'has-success': registerForm.Email.$valid}">
@@ -197,11 +209,3 @@
 	</body>
 </html>
 
-
-
-
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
