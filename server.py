@@ -9,6 +9,7 @@ from database import db_session
 # website for SQLAlchemy+Flask (declarative base) : http://flask.pocoo.org/docs/0.12/patterns/sqlalchemy/
 
 nbUsers=0
+userList=None
 
 # ------- Function checkEmail --------------------
 def checkEmail(email):
@@ -139,6 +140,14 @@ def getNewInfos():
 	session['school'] = escape(request.form['school'])
 	current_user.school=session['school']
 	return redirect('/profile')
+
+@app.route('/getSearch', methods=['POST', 'GET'])
+def getSearch():
+	search_dest = escape(request.form['search_dest'])
+	search_country = escape(request.form['search_country'])
+	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
+	userSearch(search_dest, search_country)
+	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
