@@ -1,50 +1,131 @@
-var mymodal = angular.module('mymodal', []);
+var app = angular.module('myApp', [])
 
-mymodal.controller('MainCtrl', function($scope) {
-  $scope.showModal = false;
-  $scope.toggleModal = function() {
-    $scope.showModal = !$scope.showModal;
-  };
-});
+app.controller('main-controller', ['$scope', function($scope)
+{
+	$scope.countries = [ 
+    { 
+        name: "Belgium",
+        value: "belgium",
+    }, 
+    {
+        name: "Croatia",
+        value: "croatia",
+    },
+    {
+        name: "Czech Republic",
+        value: "cr",
+    },
+    {
+        name: "Denmark",
+        value: "denmark",
+    }, 
+    {
+        name: "Estonia",
+        value: "estonia",
+    },
+	{
+        name: "Finland",
+        value: "finland",
+    },
+	{ 
+        name: "France",
+        value: "france",
+    }, 
+    {
+        name: "Georgia",
+        value: "georgia",
+    },
+    {
+        name: "Germany",
+        value: "germany",
+    },
+    {
+        name: "Ireland",
+        value: "ireland",
+    }, 
+    {
+        name: "Italy",
+        value: "italy",
+    },
+	{ 
+        name: "Luxembourg",
+        value: "luxembourg",
+    }, 
+    {
+        name: "Netherlands",
+        value: "netherlands",
+    },
+    {
+        name: "Poland",
+        value: "poland",
+    },
+    {
+        name: "Portugal",
+        value: "portugal",
+    }, 
+    {
+        name: "Spain",
+        value: "spain",
+    },
+	{
+		name: "United Kingdom",
+		value: "uk",
+	}
+	];
 
-mymodal.directive('modal', function() {
-  return {
-    template: '<div class="modal fade">' +
-      '<div class="modal-dialog">' +
-      '<div class="modal-content">' +
-      '<div class="modal-header">' +
-      '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-      '<h4 class="modal-title">{{ title }}</h4>' +
-      '</div>' +
-      '<div class="modal-body" ng-transclude></div>' +
-      '</div>' +
-      '</div>' +
-      '</div>',
-    restrict: 'E',
-    transclude: true,
-    replace: true,
-    scope: true,
-    link: function postLink(scope, element, attrs) {
-      scope.title = attrs.title;
+	$scope.submitted = false;
 
-      scope.$watch(attrs.visible, function(value) {
-        if (value == true)
-          $(element).modal('show');
-        else
-          $(element).modal('hide');
-      });
+	$scope.form = null;
 
-      $(element).on('shown.bs.modal', function() {
-        scope.$apply(function() {
-          scope.$parent[attrs.visible] = true;
-        });
-      });
+	$scope.submit = function()
+	{
+		if ($scope.frm.$valid)
+		{
+		    $scope.submitted = true;
+		}
+	};
+	
+	$scope.checkAge = function()
+	{
+		if(Number.isInteger($scope.form.age)==true)
+		{
+			console.log("THE AGE IS A NUMBER : OK");
+			required = "required";
+		}
+		else
+		{
+			console.log("THE AGE IS NOT A NUMBER : FUCK OFF BIATCH");
+			required = "fuckyou"; 
+		}
+	};
 
-      $(element).on('hidden.bs.modal', function() {
-        scope.$apply(function() {
-          scope.$parent[attrs.visible] = false;
-        });
-      });
+	$scope.password = null;
+  	$scope.passwordConfirmation = null;
+}]);
+
+app.directive('passwordConfirm', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+		scope: {
+			matchTarget: '=',
+		},
+		require: 'ngModel',
+		link: function link(scope, elem, attrs, ctrl) {
+			var validator = function (value) {
+				ctrl.$setValidity('match', value === scope.matchTarget);
+				return value;
+			}
+		
+		ctrl.$parsers.unshift(validator);
+		ctrl.$formatters.push(validator);
+      
+		// This is to force validator when the original password gets changed
+		scope.$watch('matchTarget', function(newval, oldval) {
+			validator(ctrl.$viewValue);
+		});
     }
   };
-});
+}]);
+
+
+
