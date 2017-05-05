@@ -1,5 +1,3 @@
-<!-- Quand on utilise un élément "form", une propriété portant le même nom que l'attribut "name" de notre formulaire est créée dans le foutu "$scope" permettant de vérifier que le formulaire est valide (si tous les champs "required" sont remplis). J'utilise la propriété "$valid" du formulaire pour vérifier qu'il est valide et que l'on peut définir la propriété "submitted" sur "true". Et tant que c'est pas true on peut pas envoyer le formulaire pour créer un nouvelle utilisateur. D'où le petit encadré du bas qui s'affiche quand on a envoyé notre formulaire pour montrer qu'il a bien été envoyé quoi -->
-
 <!DOCTYPE html>
 <html data-ng-app="myApp">   <!--html lié à notre app angular-->
     <head>
@@ -7,10 +5,10 @@
         <title>{{first_name}} {{last_name}}</title> <!--titre de la page-->
         <a href="home">Return home</a> <br/>
         <a href="editProfile">Edit my profile</a>
-		    <center><h1><strong>{{first_name}} {{last_name}}</strong></h1></center>
-    </head>
+	    <center><h1><strong>{{first_name}} {{last_name}}</strong></h1></center>
+    
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -54,50 +52,44 @@
                 text-align:center;
             }
         </style>
+	</head>
 
     <body data-ng-controller="main-controller">
+		<div class="container"> <!-- présentation personnelle-->
+			<div class="boxLeft">
+		        <center><label>Profile</label></center>
+		        <br/>
 
+		        <div class="form-group">
+		          <label for="Email">Email :</label>
+		          {{email}}
+		        </div>
 
+				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
+					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
+					{{country}}
+					</div>
 
-    <div class="container"> <!-- présentation personnelle-->
-				<div class="boxLeft">
-            <center><label>Profile</label></center>
-            <br/>
+		        <div class="form-group">
+					<label for="University"> University :</label>
+					{{school}}
+				</div>
+			</div>
 
-            <div class="form-group">
-              <label for="Email">Email :</label>
-              {{email}}
-            </div>
+			<div class="boxRight">
+				<center><label>Erasmus programm</label></center>
+				<br/>
 
-						<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
-							<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
-              {{country}}
-						</div>
+				<!-- <div class="form-group">
+				<label for="Period">Period :</label>
+		        {{Period}}
+				</div> -->
 
-            <div class="form-group">
-							<label for="University"> University :</label>
-              {{school}}
-						</div>
-        </div>
-
-				<div class="boxRight">
-              <center><label>Erasmus programm</label></center>
-              <br/>
-
-              <!-- <div class="form-group">
-  							<label for="Period">Period :</label>
-                {{Period}}
-  						</div> -->
-
-              <div class="form-group">
-                <label for="City">City :</label>
-                {{dest}}
-              </div>
-
-          </div>
-        </div>
-
-
-
+				<div class="form-group">
+					<label for="City">City :</label>
+					{{dest}}
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
