@@ -23,6 +23,15 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+		
+		<script>  
+		    function Ctrl($scope) {
+		        $scope.text = 'abc@example.com';
+		    }  
+		</script>
+
+
 		<!-- création de la boite pour se créer un compte -->
         <style type="text/css">
             .box1
@@ -45,7 +54,8 @@
             }
         </style>
     </head>
-    <body data-ng-controller="main-controller">
+
+    <body>
         <div class="box1">
         	<div class="container">
 			<h2>Sonera Home Page</h2>
@@ -54,6 +64,7 @@
 	  		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Sign In</button>
 
 			<!-- Modal 1 -->
+			<div data-ng-controller="main-controller">
 			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -127,29 +138,29 @@
 				</div>
 			</div>
 		</div>
-		<!-- Modal 1 -->
+		</div>
+		<!-- Modal 2 -->
 		<div class="modal fade" id="myModal2" role="dialog">
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Sign Up</h4>
+						<h4 class="modal-title">Sign In</h4>
 					</div>
 					<div class="modal-body">
-						<form name="frm" class="form">	
-								<div class="form-group">
-									<label for="Email">Email:</label>
-									<div>
-							   			<input id="Email" type="email" class="form-control" required name="Email" ng-model="Email" />
-										<span class="help-block" >Required</span>
-									</div>
-								</div>
+						<form role="form" name="myForm" ng-controller="Ctrl">
+							<label>Email:</label>
+							<div class="form-group">
+								<input class="form-control" type="email" name="input" ng-model="text" required>
+								<span class="error" ng-show="myForm.input.$error.required">Required!</span>
+								<span class="error" ng-show="myForm.input.$error.email">Not valid email!</span>
+							</div>
 						</form>
 						<form role="form" name="myForm" novalidate>
 							<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
 								<label for="password">Password:</label>
-								<input class="form-control" type="text" name="Password" placeholder="Password..." required ng-model="Password"/> <!-- mettre des majuscule sinon pb avec l'autre mdp -->
+								<input class="form-control" type="text" name="Password" required ng-model="Password"/> <!-- mettre des majuscule sinon pb avec l'autre mdp -->
 								<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
 							</div>
 						</form>

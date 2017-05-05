@@ -13,7 +13,7 @@ app.controller('main-controller', ['$scope', function($scope)
 	$scope.password = null;
   	$scope.passwordConfirmation = null;
   	//$("#country_selector").countrySelect({});
-
+	$scope.EMAIL_REGEXP = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
 }]);
 
 app.directive('passwordConfirm', ['$parse', function ($parse) {
