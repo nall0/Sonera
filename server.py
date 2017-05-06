@@ -79,7 +79,7 @@ def index():
 	nbUsers = countNbUsers()
 	if logged:
 		return redirect('/home')
-	return render_template('sigin.html', logged=logged, nbUsers=nbUsers)
+	return render_template('SignAdrien.html', logged=logged, nbUsers=nbUsers)
 
 @app.route('/login', methods=['POST'])
 def login():
