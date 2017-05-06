@@ -67,15 +67,33 @@
 
 				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
 					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
-					{{country}}
+						{{country}}
 					</div>
 
 		        <div class="form-group">
 					<label for="University"> University :</label>
 					{{school}}
 				</div>
-			</div>
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_bio">Biography</button>
 
+				<!-- Modal 1 -->
+				<div data-ng-controller="main-controller">
+					<div class="modal fade" id="myModal_bio" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Biography</h4>
+								</div>
+								<div class="modal-body">
+									{{Biography}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="boxRight">
 				<center><label>Erasmus programm</label></center>
 				<br/>
