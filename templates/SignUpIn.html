@@ -10,18 +10,18 @@
 
         <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
         <script src="main.js"></script>
-		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		    <script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
-		    <script src="../build/js/countrySelect.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+		<script src="../build/js/countrySelect.min.js"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		    <link rel="stylesheet" href="build/css/countrySelect.min.css">
-		    <link rel="stylesheet" href="build/css/demo.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="build/css/demo.css">
 
-		    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<script>
 		    function Ctrl($scope) {
@@ -74,29 +74,29 @@
               <form action="/signup" method="POST">
 
 									<label>Email:</label></br>
-									<input name="email" type="email" class="form-control"/></br>
+									<input name="email" type="email" data-ng-model="form.email" class="form-control"/></br>
 
 									<label for="first_name">First name:</label></br>
-                  <input name = "first_name" type="text" data-ng-model="form.name" class="form-control" required="required"/></br>
+                  <input name = "first_name" type="text" data-ng-model="form.first_name" class="form-control" required="required" data-ng-disabled="!form.email"/></br>
 
 									<label for="last_name">Last name:</label></br>
-                  <input name = "last_name" type="text" data-ng-model="form.name" class="form-control" required="required"/></br>
+                  <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required="required" data-ng-disabled="!form.first_name"/></br>
 
                   <label for="password_sigup">Password:</label></br>
-                  <input type="password" name="password_sigup" placeholder="password..."></br>
+                  <input type="password" name="password_sigup" placeholder="password..." class="form-control" data-ng-model="form.password" required="required" data-ng-disabled="!form.last_name"/></br>
 
-                  <input type="password" name="passwordConfirmation" placeholder="confirm password..." password-confirm match-target="password_sigin"/></br>
+                  <input type="password" name="passwordConfirmation" placeholder="confirm password..." class="form-control" data-ng-model="form.passwordConfirmation" password-confirm match-target="password_sigin" required="required" data-ng-disabled="!form.password"/></br>
                   <span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
                   <span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
 
                   <label for="biography">You can say something about yourself:</label></br>
-                  <input type="text" name="biography"></br>
-
+                  <input name="biography" type="text" name="biography" data-ng-model="form.biography" required="required" class="form-control" data-ng-disabled="!form.password"></br>
+									
 									<label for="gender">Gender:</label></br>
-									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" checked>
+									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography" checked>
 									<label>Male</label>
-
-									<input name="gender" type="radio"  value="Female" data-ng-model="form.gender" required="required">
+									
+									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography">
 									<label>Female</label></br>
 
                   <div class="form-group">
@@ -111,7 +111,7 @@
   								<script>$("#country_selector").countrySelect({});</script>
 
                 <div class="form-item" style="display:none;">
-                  <input name="country" type="text">
+                  <input name="country" type="text" class="form-control"/>
 									<input name="country_selector_code" type="text" id="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
 									<label for="country_selector_code"></label>
 								</div>
@@ -124,7 +124,7 @@
 								</div>-->
 
                 <label for="school">School:</label></br>
-                <input type="text" name="school">
+                <input type="text" name="school" required="required" class="form-control" data-ng-disabled="!form.gender"/>
 
                 <br></br>
 
@@ -156,7 +156,7 @@
               <form action="/login" method="POST">
 
 							<label>Email:</label></br>
-							<input class="form-control" type="email" name="email" ng-model="text" required>
+							<input class="form-control" type="email" name="email" ng-model="text" required/>
 							<!--<span class="error" ng-show="myForm.input.$error.required">Required!</span>
 							<span class="error" ng-show="myForm.input.$error.email">Not valid email!</span>-->
 
@@ -165,8 +165,8 @@
 							<!--<span class="help-block" ng-show="myForm.password_sigin.$error.required">Required</span>-->
 
 						<div class="center">
-              <button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       			 	       <button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>
+              			   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
