@@ -3,7 +3,11 @@
 	-moz-box-sizing: border-box; }
 
 body {
-	margin: 20px;
+	margin:0;
+  	padding:0;
+  	background: url(../img/university.jpg) no-repeat center fixed; 
+  	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  	background-size: cover; /* version standardisée */
 	font-size: 14px;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #555; }
@@ -64,3 +68,4 @@ button {
 
 #result {
 	margin-bottom: 100px; }
+
