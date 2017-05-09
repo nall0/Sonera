@@ -22,7 +22,7 @@
 			 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
 
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
-			 
+
 		<script>
 		    function Ctrl($scope) {
 		        $scope.text = 'abc@example.com';
@@ -73,7 +73,7 @@
 						<div class="modal-body">
               <form action="/signup" method="POST">
 
-									<label>Email:</label></br>
+									<label for="email">Email:</label></br>
 									<input name="email" type="email" data-ng-model="form.email" class="form-control"/></br>
 
 									<label for="first_name">First name:</label></br>
@@ -88,8 +88,8 @@
                   <!--<input type="password" name="passwordConfirmation" placeholder="confirm password..." class="form-control" data-ng-model="form.passwordConfirmation" password-confirm match-target="password_sigin" required="required" data-ng-disabled="!form.password"/></br>
                   <span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
                   <span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>-->
-                  
-                  
+
+
                   <form role="form" name="myForm" novalidate>
 					  			<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
 										<label for="password_sigup">Password:</label>
@@ -102,15 +102,14 @@
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
 					  			</div>
-									</form>
 
                   <label for="biography">You can say something about yourself:</label></br>
                   <input name="biography" type="text" name="biography" data-ng-model="form.biography" required="required" class="form-control" data-ng-disabled="!form.passwordConfirmation"></br>
-									
+
 									<label for="gender">Gender:</label></br>
 									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography" checked>
 									<label>Male</label>
-									
+
 									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography">
 									<label>Female</label></br>
 
