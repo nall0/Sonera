@@ -18,8 +18,9 @@
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 			 <link rel="stylesheet" href="build/css/countrySelect.min.css">
-			 <link rel="stylesheet" href="../build/css/demo.css">
+			 <link rel="stylesheet" href="/build/css/demo.css">
 			 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+			 <link rel="stylesheet" href="../build/css/demo.css">
 
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -102,6 +103,7 @@
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
 					  			</div>
+									</form>
 
                   <label for="biography">You can say something about yourself:</label></br>
                   <input name="biography" type="text" name="biography" data-ng-model="form.biography" required="required" class="form-control" data-ng-disabled="!form.passwordConfirmation"></br>
@@ -181,6 +183,7 @@
        			 	       <button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>
               			   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
