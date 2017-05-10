@@ -39,6 +39,7 @@
             border:1px solid #dedede;
             border-radius:5px;
             padding:20px;
+            background-color: white;
           }
             .center
             {
@@ -54,10 +55,11 @@
     <body>
       <div class="box1">
       <div class="container">
+
 			<h2>Welcome on Sonera</h2>
 			<!-- Trigger the modal with a button -->
-	  		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Sign Up</button>
-	  		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Sign In</button>
+	  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Sign Up</button>
+	  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Sign In</button>
 
 			<!--- Modal 1 ------------------------------------------------------------------------------------------------->
 			<div data-ng-controller="main-controller">
@@ -131,7 +133,7 @@
                 <label for="school">School:</label></br>
                 <input type="text" name="school" data-ng-model="form.school" required class="form-control"/>
                 <label for="dest">Erasmus destination :</label></br>
-                <input name="dest" type="text" class="form-control"/></br
+                <input name="dest" type="text" class="form-control"/></br>
 
                 <div class="modal-footer">
                   <div class="center">
@@ -168,11 +170,13 @@
 							<input class="form-control" type="password" name="password_sigin" required ng-model="password_sigin"/>
 							<!--<span class="help-block" ng-show="myForm.password_sigin.$error.required">Required</span>-->
 
+              <div class="modal-footer">
 						<div class="center">
        			  <button class="btn btn-primary" data-ng-click="submit()">Sign In</button>
        			  <!--<button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>-->
             	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
+            </div>
 						</form>
 					</div>
 				</div>
