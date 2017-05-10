@@ -162,7 +162,7 @@ def getSearch():
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], userList=userList, resultFound=resultFound)
+	return render_template('home.html', result_list=userList, first_name=session['first_name'], last_name=session['last_name'], email=session['email'], userList=userList, resultFound=resultFound)
 # ------------------------------------------------------------------------------------------------
 
 
