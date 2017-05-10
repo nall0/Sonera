@@ -19,11 +19,11 @@
 			</form>
 
     <strong>Results : </strong>
-        <p>{% if resultFound %}
+        <p>
             {% for u in result_list %}
-              {{u.first_name}}
+              {{u}}
             {% endfor %}
-          {% endif %}
+
         </p>
 
     </body>

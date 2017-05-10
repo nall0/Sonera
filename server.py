@@ -10,7 +10,7 @@ from database import db_session
 
 nbUsers=0
 resultFound=False
-usernameList = None
+usernameList = []
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
@@ -23,12 +23,16 @@ def checkEmail(email):
 # --------- Function
 def userSearch(city):
 	res=[]
+	global resultFound
 	from users import User
-	userList = User.query.filter(User.first_name == city)
+	userList = User.query.filter(User.dest == city)
+
 	resultFound=True
 	for u in userList:
 		res.append(u.first_name)
+
 	return res
+
 
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -39,11 +43,11 @@ def countNbUsers():
 		nbUsers += 1
 	return nbUsers
 # ------- Function addUser() -----------------------
-def addUser(email, first_name, last_name, password, biography, g , c, sch):
+def addUser(email, first_name, last_name, password, biography, g , c, sch, d):
 	from database import db_session
 	from users import User
 	global nbUsers
-	new_user = User(email, first_name, last_name, password, biography, g, c, sch)
+	new_user = User(email, first_name, last_name, password, biography, g, c, sch, d)
 	db_session.add(new_user)
 	db_session.commit()
 	nbUsers += 1
@@ -113,9 +117,9 @@ def signup():
 	session['gender'] = escape(request.form['gender'])
 	session['country'] = escape(request.form['country'])
 	session['school'] = escape(request.form['school'])
-	session['dest'] = None
+	session['dest'] = escape(request.form['dest'])
 	if checkEmail(session['email']):
-		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'])
+		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'], session['dest'])
 		session['id'] = nbUsers
 		session['logged'] = True
 	return redirect('/')
@@ -151,15 +155,21 @@ def getNewInfos():
 
 @app.route('/getSearch', methods=['POST', 'GET'])
 def getSearch():
+	global usernameList
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
 	usernameList = userSearch(search_dest)
+	print("USER LIST")
+	for u in usernameList:
+		print(u)
+	print("*************")
 
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
+	global usernameList
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound, result_list=usernameList)
 # ------------------------------------------------------------------------------------------------
 
