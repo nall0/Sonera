@@ -18,6 +18,7 @@
 				</p>
 			</form>
 
+<<<<<<< HEAD
 			<strong>Results : </strong>
 			<p> {% if resultFound %}
 					{% for u in userList %}
@@ -26,5 +27,16 @@
 					{% endif %}
 			</p>
 		</body>
+=======
+    <strong>Results : </strong>
+        <p>{% if resultFound %}
+            {% for u in result_list %}
+              {{u}}
+            {% endfor %}
+          {% endif %}
+        </p>
+
+    </body>
+>>>>>>> 104bc1c3f11b076c1f0e6618acbffedbee6f5e57
 	<a href="/logout">[logout]</a>
 </html>
