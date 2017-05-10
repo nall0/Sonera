@@ -13,33 +13,35 @@
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
-			 <script src="../build/js/countrySelect.min.js"></script>
+
+			 <script src="/build/js/countrySelect.min.js"></script>
+			 <script src="bower_components/angular-country-picker/country-picker.js"></script>
+			 <script src="node_modules/angular-country-picker/country-picker.js"></script>
 
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	 
 			 <link rel="stylesheet" href="build/css/countrySelect.min.css">
 			 <link rel="stylesheet" href="/build/css/demo.css">
 			 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-			 <link rel="stylesheet" href="../build/css/demo.css">
 
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<script>
-		    function Ctrl($scope) {
-		        $scope.text = 'abc@example.com';
-		    }
-		</script>
+			 <script>
+				  function Ctrl($scope) {
+				      $scope.text = 'abc@example.com';
+				  }
+			 </script>
 
-		<!-- création de la boite pour se créer un compte -->
-        <style type="text/css">
-            .box1
-            {
-                width:500px;
-                margin:100px auto auto auto;
-                border:1px solid #dedede;
-                border-radius:5px;
-                padding:20px;
-            }
+			 <!-- création de la boite pour se créer un compte -->
+       <style type="text/css">
+       		.box1
+          {
+       	 	  width:500px;
+            margin:100px auto auto auto;
+            border:1px solid #dedede;
+            border-radius:5px;
+            padding:20px;
+          }
             .center
             {
                 text-align:center;
@@ -92,17 +94,17 @@
 
 
                   <form role="form" name="myForm" novalidate>
-					  			<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
-										<label for="password_sigup">Password:</label>
-										<input class="form-control" type="password" name="password_sigup" placeholder="password..." data-ng-model="form.password" required data-ng-disabled="!form.last_name"/>
-										<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
-					 				</div>
-						 			<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
-										<label for="passwordConfirmation">Confirm Password:</label>
-										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" password-confirm match-target="password" data-ng-disabled="!form.password"/>
-										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
-										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
-					  			</div>
+										<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
+											<label for="password">Password:</label>
+											<input class="form-control" type="text" name="password" placeholder="password..." required ng-model="password"/>
+											<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
+						 			</div>
+								 		<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
+											<label for="passwordConfirmation">Confirm Password:</label>
+											<input class="form-control" type="password" name="passwordConfirmation" required ng-model="passwordConfirmation" password-confirm match-target="password"/>
+											<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
+											<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
+										</div>
 									</form>
 
                   <label for="biography">You can say something about yourself:</label></br>
