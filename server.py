@@ -10,7 +10,7 @@ from database import db_session
 
 nbUsers=0
 resultFound=False
-
+usernameList = []
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
@@ -22,16 +22,17 @@ def checkEmail(email):
 
 # --------- Function
 def userSearch(city):
+	res=[]
+	global resultFound
 	from users import User
 	userList = User.query.filter(User.dest == city)
+
 	resultFound=True
-
-
-	print("**********RESULT*******")
 	for u in userList:
-		print("Res = ")
-		print(u.first_name)
-	print("***********************")
+		res.append(u.first_name)
+
+	return res
+
 
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -154,18 +155,22 @@ def getNewInfos():
 
 @app.route('/getSearch', methods=['POST', 'GET'])
 def getSearch():
+	global usernameList
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	userList = userSearch(search_dest)
-	print("****************************************************")
-	print("search dest : " + search_dest)
-	print("****************************************************")
+	usernameList = userSearch(search_dest)
+	print("USER LIST")
+	for u in usernameList:
+		print(u)
+	print("*************")
+
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound)
+	global usernameList
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound, result_list=usernameList)
 # ------------------------------------------------------------------------------------------------
 
 
