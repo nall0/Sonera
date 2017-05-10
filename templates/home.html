@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Sonera Home</title>
-	
+
     </head>
 
 		<body>
@@ -11,34 +11,19 @@
 				Your email is {{ email }}. Don't forget it, you'll need it to login ! </p>
 			<p>My profile : <a href="profile" title="Profile"> Profile </a> </p>
 			<form action="/getSearch" method="POST">
-				
+
 				<p>
 					<input type="text" name="search_dest">
 					<input type="text" name="search_country">
 					<input type="submit" value="search">
 				</p>
 			</form>
-<<<<<<< HEAD
-			<strong>Results : </strong>
-			<p> {% if resultFound %}
-					{% for u in userList %}
-					{{u}}
-					{% endfor %}
-					{% endif %}
-			</p>
-		</body>
-=======
-
     <strong>Results : </strong>
         <p>
             {% for u in result_list %}
               {{u}}
             {% endfor %}
-
         </p>
-
     </body>
-
->>>>>>> 26828ae9852b6cf87ba3977e902db67ad105d2b4
 	<a href="/logout">[logout]</a>
 </html>
