@@ -9,7 +9,6 @@ from database import db_session
 # website for SQLAlchemy+Flask (declarative base) : http://flask.pocoo.org/docs/0.12/patterns/sqlalchemy/
 
 nbUsers=0
-userList=None
 resultFound=False
 
 # ------- Function checkEmail --------------------
@@ -22,15 +21,18 @@ def checkEmail(email):
 	return True
 
 # --------- Function
-def userSearch(dest, country=None):
-	global userList
+def userSearch(city):
 	from users import User
-	if country == None:
-		userList = User.query.filter(User.dest == dest)
-		resultFound=True
-	else:
-		userList = User.query.filter(User.dest == dest and User.country == country)
-		resultFound=True
+	userList = User.query.filter(User.first_name == 'Max')
+
+	for u in userList:
+		print("userFound = " + u.first_name)
+
+	resultFound=True
+	return userList
+	#else:
+		#userList = User.query.filter(User.dest == city and User.country == country)
+		#resultFound=True
 
 
 # ------- Function countNbUsers --------------------
@@ -157,12 +159,15 @@ def getSearch():
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	userSearch(search_dest, search_country)
+	userList = userSearch(search_dest)
+	print("****************************************************")
+	print("search dest : " + search_dest)
+	print("****************************************************")
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', result_list=userList, first_name=session['first_name'], last_name=session['last_name'], email=session['email'], userList=userList, resultFound=resultFound)
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound)
 # ------------------------------------------------------------------------------------------------
 
 
