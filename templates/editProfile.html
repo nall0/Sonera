@@ -1,31 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="myApp">   <!--html lié à notre app angular-->
     <head>
-        <meta charset="utf-8" />
-        <title>Edit {{first_name}} {{last_name}}'s profile</title>
+       <meta charset="utf-8" />
+
+       <title>Edit {{first_name}} {{last_name}}'s profile</title> <!--tire de la page-->
+       <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+       <script src="main.js"></script>
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			 <script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+			 <script src="../build/js/countrySelect.min.js"></script>
+
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			 <link rel="stylesheet" href="build/css/countrySelect.min.css">
+			 <link rel="stylesheet" href="/build/css/demo.css">
+			 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+			 <link rel="stylesheet" href="../build/css/demo.css">
+
+			 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script>
+		    function Ctrl($scope) {
+		        $scope.text = 'abc@example.com';
+		    }
+		</script>
+
+		<!-- création de la boite -->
+        <style type="text/css">
+            .box1
+            {
+                width:500px;
+                margin:10px auto auto auto;
+                border:1px solid #dedede;
+                border-radius:5px;
+                padding:20px;
+            }
+            .center
+            {
+                text-align:center;
+            }
+            .margin-right-10
+            {
+                margin-right:10px;
+            }
+            .style_bio{
+              border:1px solid #dedede;
+              border-radius:5px;
+              padding:20px;
+              width:100%;
+              height:200px;
+            }
+        </style>
     </head>
 
-    <form action="/getNewInfos" method="POST">
     <body>
-		<p> Please enter your personnal informations below <br>
-      First name <br>
-      <input type="text" value={{first_name}} name="first_name"><br>
-      Last name <br>
-      <input type="text" value={{last_name}} name="last_name"><br>
-      Password <br>
-      <input type="password" value={{password}} name="password_sigup"><br>
-      Biography<br>
-      <input type="text" value={{biography}} name="biography"><br>
-      Country<br>
-      <input type="text" value={{country}} name="country"><br>
-      School<br>
-      <input type="text" value={{school}} name="school"><br>
-      Destination<br>
-      <input type="text" value={{dest}} name="dest"><br>
-      <input type="submit" value="submit">
-    </p>
-    <p> <a href="home">Return home without saving</a> </p>
-    </body>
-    </form>
+			<h2>Please enter your new personnal informations below</h2>
+      <a href="home">Return home without saving</a>
 
+      <div class="box1">
+              <form action="/getNewInfos" method="POST">
+                <center><input type="submit" value="submit" class="btn btn-primary"></center>
+                <label>First name</label><br>
+                <input type="text" value={{first_name}} name="first_name" class="form-control"><br>
+                <label>Last name</label><br>
+                <input type="text" value={{last_name}} name="last_name" class="form-control"><br>
+                <label>Password</label><br>
+                <input type="password" value={{password}} name="password_sigup" class="form-control"><br>
+                <label>Country</label><br>
+                <input type="text" value={{country}} name="country" class="form-control"><br>
+                <label>School:</label></br>
+                <input type="text" value={{school}} name="school" class="form-control"><br>
+                <label>Destination</label><br>
+                <input type="text" value={{dest}} name="dest" class="form-control"><br>
+                <label>Biography</label><br>
+                <textarea type="text" name="biography" class="style_bio" ROWS="5" COLS="50">{{biography}}</textarea>
+                <!--<input type="text" value={{biography}} name="biography" class="style_bio"><br>-->
+
+              </form>
+			</div>
+
+	</body>
 </html>
