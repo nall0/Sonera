@@ -14,14 +14,14 @@ class User(Base):
 	school = Column(String)
 	gender = Column(String)
 
-	def __init__(self, email=None, first_name=None, last_name=None, password=None, bio=None, g=None, c=None, s=None):
+	def __init__(self, email=None, first_name=None, last_name=None, password=None, biography=None, gender=None, country=None, s=None):
 		self.email = email
 		self.first_name = first_name
 		self.last_name = last_name
 		self.password = password
-		self.biography = bio
-		self.gender = g
-		self.country = c
+		self.biography = biography
+		self.gender = gender
+		self.country = country
 		self.dest = None
 		self.school = s
 

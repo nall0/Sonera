@@ -145,14 +145,14 @@ def getNewInfos():
 	current_user.first_name=session['first_name']
 	session['last_name'] = escape(request.form['last_name'])
 	current_user.last_name=session['last_name']
-	#session['biography'] = escape(request.form['biography'])
-	#current_user.biography=session['biography']
- 	#session['country'] = escape(request.form['country'])
+	session['biography'] = escape(request.form['biography'])
+	current_user.biography=session['biography']
+	#session['country'] = escape(request.form['country'])
 	#current_user.country=session['country']
-	#session['dest'] = escape(request.form['dest'])
-	#current_user.dest=session['dest']
-	#session['school'] = escape(request.form['school'])
-	#current_user.school=session['school']
+	session['dest'] = escape(request.form['dest'])
+	current_user.dest=session['dest']
+	session['school'] = escape(request.form['school'])
+	current_user.school=session['school']
 	return redirect('/profile')
 
 @app.route('/getSearch', methods=['POST', 'GET'])
