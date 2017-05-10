@@ -9,7 +9,6 @@ from database import db_session
 # website for SQLAlchemy+Flask (declarative base) : http://flask.pocoo.org/docs/0.12/patterns/sqlalchemy/
 
 nbUsers=0
-userList=None
 resultFound=False
 
 # ------- Function checkEmail --------------------
@@ -22,16 +21,17 @@ def checkEmail(email):
 	return True
 
 # --------- Function
-def userSearch(dest, country=None):
-	global userList
+def userSearch(city):
 	from users import User
-	if country == None:
-		userList = User.query.filter(User.dest == dest)
-		resultFound=True
-	else:
-		userList = User.query.filter(User.dest == dest and User.country == country)
-		resultFound=True
+	userList = User.query.filter(User.dest == city)
+	resultFound=True
 
+
+	print("**********RESULT*******")
+	for u in userList:
+		print("Res = ")
+		print(u.first_name)
+	print("***********************")
 
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -42,11 +42,11 @@ def countNbUsers():
 		nbUsers += 1
 	return nbUsers
 # ------- Function addUser() -----------------------
-def addUser(email, first_name, last_name, password, biography, g , c, sch):
+def addUser(email, first_name, last_name, password, biography, g , c, sch, d):
 	from database import db_session
 	from users import User
 	global nbUsers
-	new_user = User(email, first_name, last_name, password, biography, g, c, sch)
+	new_user = User(email, first_name, last_name, password, biography, g, c, sch, d)
 	db_session.add(new_user)
 	db_session.commit()
 	nbUsers += 1
@@ -116,9 +116,9 @@ def signup():
 	session['gender'] = escape(request.form['gender'])
 	session['country'] = escape(request.form['country'])
 	session['school'] = escape(request.form['school'])
-	session['dest'] = None
+	session['dest'] = escape(request.form['dest'])
 	if checkEmail(session['email']):
-		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'])
+		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'], session['dest'])
 		session['id'] = nbUsers
 		session['logged'] = True
 	return redirect('/')
@@ -157,12 +157,15 @@ def getSearch():
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	userSearch(search_dest, search_country)
+	userList = userSearch(search_dest)
+	print("****************************************************")
+	print("search dest : " + search_dest)
+	print("****************************************************")
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	return render_template('home.html', result_list=userList, first_name=session['first_name'], last_name=session['last_name'], email=session['email'], userList=userList, resultFound=resultFound)
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound)
 # ------------------------------------------------------------------------------------------------
 
 

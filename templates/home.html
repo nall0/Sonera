@@ -18,6 +18,7 @@
 					<input type="submit" value="search">
 				</p>
 			</form>
+<<<<<<< HEAD
 			<strong>Results : </strong>
 			<p> {% if resultFound %}
 					{% for u in userList %}
@@ -26,5 +27,18 @@
 					{% endif %}
 			</p>
 		</body>
+=======
+
+    <strong>Results : </strong>
+        <p>{% if resultFound %}
+            {% for u in result_list %}
+              {{u.first_name}}
+            {% endfor %}
+          {% endif %}
+        </p>
+
+    </body>
+
+>>>>>>> 26828ae9852b6cf87ba3977e902db67ad105d2b4
 	<a href="/logout">[logout]</a>
 </html>
