@@ -10,7 +10,7 @@ from database import db_session
 
 nbUsers=0
 resultFound=False
-usernameList = []
+userList = []
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
@@ -29,9 +29,12 @@ def userSearch(city):
 
 	resultFound=True
 	for u in userList:
+		print(" ------------------ RES --------------")
+		print(u.first_name)
+		print(" --------------------------------")
 		res.append(u.first_name)
 
-	return res
+	return userList
 
 
 # ------- Function countNbUsers --------------------
@@ -155,22 +158,19 @@ def getNewInfos():
 
 @app.route('/getSearch', methods=['POST', 'GET'])
 def getSearch():
-	global usernameList
+	global userList
+	userList = []
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	usernameList = userSearch(search_dest)
-	print("USER LIST")
-	for u in usernameList:
-		print(u)
-	print("*************")
+	userList = userSearch(search_dest)
 
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-	global usernameList
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound, result_list=usernameList)
+	global userList
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound, result_list=userList)
 # ------------------------------------------------------------------------------------------------
 
 
