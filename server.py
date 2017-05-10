@@ -29,6 +29,9 @@ def userSearch(city):
 
 	resultFound=True
 	for u in userList:
+		print(" ------------------ RES --------------")
+		print(u.first_name)
+		print(" --------------------------------")
 		res.append(u.first_name)
 
 	return res
@@ -158,6 +161,7 @@ def getSearch():
 	global usernameList
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
+	print("------------- search dest : " + search_dest)
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
 	usernameList = userSearch(search_dest)
 	print("USER LIST")
