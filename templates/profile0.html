@@ -65,15 +65,16 @@
 		          {{email}}
 		        </div>
 
-				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
-					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
-						{{country}}
-					</div>
+    				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
+    					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
+    					{{country}}
+    				</div>
 
 		        <div class="form-group">
-					<label for="University"> University :</label>
-					{{school}}
-				</div>
+					    <label for="Gender"> Gender:</label>
+					    {{gender}}
+				    </div>
+
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_bio">Biography</button>
 
 				<!-- Modal 1 -->
@@ -95,7 +96,7 @@
 				</div>
 			</div>
 			<div class="boxRight">
-				<center><label>Erasmus program</label></center>
+				<center><label>Studies</label></center>
 				<br/>
 
 				<!-- <div class="form-group">
@@ -107,6 +108,12 @@
 					<label for="City">City :</label>
 					{{dest}}
 				</div>
+
+        <div class="form-group">
+          <label for="University"> Coming University:</label>
+          {{school}}
+        </div>
+
 			</div>
 		</div>
 	</body>
