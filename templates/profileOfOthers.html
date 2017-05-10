@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">   <!--html lié à notre app angular-->
+    <head>
+        <meta charset="utf-8" />
+        <title>{{first_name}} {{last_name}}</title> <!--titre de la page-->
+        <a href="home">Return home</a> <br/>
+	    <center><h1><strong>{{first_name}} {{last_name}}</strong></h1></center>
+
+
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="js/jquery-birthday-picker.min.js"></script>
+
+		<!-- création de la boite -->
+        <style type="text/css">
+            .boxLeft
+            {
+            	margin:8%;
+              margin-left:15%;
+              margin-right:5%;
+              margin-top: 10%;
+              margin-bottom: auto;
+              width:30%;
+              border:1px solid #dedede;
+              border-radius:3%;
+              padding:5%;
+				      background-color:#ADD8E6;
+				      float:left;
+            }
+            .boxRight
+            {
+            	margin:8%;
+              margin-left:5%;
+              margin-right:15%;
+              margin-top: 10%;
+              margin-bottom: auto;
+              width:30%;
+              border:1px solid #dedede;
+              border-radius:3%;
+              padding:5%;
+				      background-color:#ADD8E6;
+				      float:right;
+            }
+            .center
+            {
+                text-align:center;
+            }
+        </style>
+	</head>
+
+    <body data-ng-controller="main-controller">
+		<div class="container"> <!-- présentation personnelle-->
+			<div class="boxLeft">
+		        <center><label>Profile</label></center>
+		        <br/>
+
+		        <div class="form-group">
+		          <label for="Email">Email :</label>
+		          {{email}}
+		        </div>
+
+    				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
+    					<label for="Nationality">Nationality :</label> <!-- label pour le titre de la case de dessous-->
+    					{{country}}
+    				</div>
+
+		        <div class="form-group">
+					    <label for="Gender"> Gender:</label>
+					    {{gender}}
+				    </div>
+
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_bio">Biography</button>
+
+				<!-- Modal 1 -->
+				<div data-ng-controller="main-controller">
+					<div class="modal fade" id="myModal_bio" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Biography</h4>
+								</div>
+								<div class="modal-body">
+									{{biography}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="boxRight">
+				<center><label>Studies</label></center>
+				<br/>
+
+				<!-- <div class="form-group">
+				<label for="Period">Period :</label>
+		        {{Period}}
+				</div> -->
+
+				<div class="form-group">
+					<label for="Dest">Erasmus destination :</label>
+					{{dest}}
+				</div>
+
+        <div class="form-group">
+          <label for="University"> Coming University:</label>
+          {{school}}
+        </div>
+
+			</div>
+		</div>
+	</body>
+</html>
