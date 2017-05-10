@@ -7,6 +7,7 @@
        <meta charset="utf-8" />
 
        <title>Sonera Homepage</title> <!--tire de la page-->
+
        <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
        <script src="main.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -85,27 +86,17 @@
 									<label for="last_name">Last name:</label></br>
                   <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required data-ng-disabled="!form.first_name"/></br>
 
-                  <!--<label for="password_sigup">Password:</label></br>
-                  <input type="password" name="password_sigup" placeholder="password..." class="form-control" data-ng-model="form.password" required="required" data-ng-disabled="!form.last_name"/></br>-->
-
-                  <!--<input type="password" name="passwordConfirmation" placeholder="confirm password..." class="form-control" data-ng-model="form.passwordConfirmation" password-confirm match-target="password_sigin" required="required" data-ng-disabled="!form.password"/></br>
-                  <span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
-                  <span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>-->
-
-
-                  <form role="form" name="myForm" novalidate>
-										<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
-											<label for="password">Password:</label>
-											<input class="form-control" type="text" name="password" placeholder="password..." required ng-model="password"/>
-											<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
-						 			</div>
-								 		<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
-											<label for="passwordConfirmation">Confirm Password:</label>
-											<input class="form-control" type="password" name="passwordConfirmation" required ng-model="passwordConfirmation" password-confirm match-target="password"/>
-											<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
-											<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
-										</div>
-									</form>
+					  			<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
+										<label for="password_sigup">Password:</label>
+										<input class="form-control" type="password" name="password_sigup" placeholder="password..." data-ng-model="form.password" required data-ng-disabled="!form.last_name"/>
+										<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
+					 				</div>
+						 			<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
+										<label for="passwordConfirmation">Confirm Password:</label>
+										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" password-confirm match-target="password" data-ng-disabled="!form.password"/>
+										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
+										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
+					  			</div>
 
                   <label for="biography">You can say something about yourself:</label></br>
                   <input name="biography" type="text" name="biography" data-ng-model="form.biography" required class="form-control" data-ng-disabled="!form.passwordConfirmation"></br>
@@ -117,7 +108,7 @@
 									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography">
 									<label>Female</label></br>
 
-                  <div class="form-group">
+                  <!--<div class="form-group">
   								    <label for="s-nationality">Nationality:</label></br>
   										<input id="country_selector" type="text">
   										<label for="country_selector" style="display:none;"></label>
@@ -126,14 +117,14 @@
   									<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
   									<label for="country_selector_code"></label>
   								</div>
-  								<script>$("#country_selector").countrySelect({});</script>
+  								<script>$("#country_selector").countrySelect({});</script>-->
 
                 <div class="form-item" style="display:none;">
                   <input name="country" type="text" class="form-control"/>
-									<input name="country_selector_code" type="text" id="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
-									<label for="country_selector_code"></label>
+									<!--<input name="country_selector_code" type="text" id="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
+									<label for="country_selector_code"></label>-->
 								</div>
-								<script>$("#country_selector").countrySelect({});</script>
+								<!--<script>$("#country_selector").countrySelect({});</script>-->
 
                 <!-- AGE pas configuré dans le serveur pour le moment
 								<div class="form-group">
@@ -143,7 +134,6 @@
 
                 <label for="school">School:</label></br>
                 <input type="text" name="school" data-ng-model="form.school" required class="form-control" required data-ng-disabled="!form.gender"/>
-
                 <br></br>
 
                 <div class="modal-footer">

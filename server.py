@@ -116,6 +116,7 @@ def signup():
 	session['gender'] = escape(request.form['gender'])
 	session['country'] = escape(request.form['country'])
 	session['school'] = escape(request.form['school'])
+	session['dest'] = None
 	if checkEmail(session['email']):
 		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'])
 		session['id'] = nbUsers
@@ -130,7 +131,7 @@ def profile():
 	return render_template('profile0.html', first_name=session['first_name'], last_name=session['last_name'], biography=bio,
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
-@app.route('/editProfile')
+@app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
@@ -146,8 +147,8 @@ def getNewInfos():
 	current_user.last_name=session['last_name']
 	session['biography'] = escape(request.form['biography'])
 	current_user.biography=session['biography']
-	session['country'] = escape(request.form['country'])
-	current_user.country=session['country']
+	#session['country'] = escape(request.form['country'])
+	#current_user.country=session['country']
 	session['dest'] = escape(request.form['dest'])
 	current_user.dest=session['dest']
 	session['school'] = escape(request.form['school'])

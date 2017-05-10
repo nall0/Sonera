@@ -6,7 +6,7 @@
         <a href="home">Return home</a> <br/>
         <a href="editProfile">Edit my profile</a>
 	    <center><h1><strong>{{first_name}} {{last_name}}</strong></h1></center>
-    
+
 
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,15 +65,16 @@
 		          {{email}}
 		        </div>
 
-				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
-					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
-						{{country}}
-					</div>
+    				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
+    					<label for="Nationality">Country :</label> <!-- label pour le titre de la case de dessous-->
+    					{{country}}
+    				</div>
 
 		        <div class="form-group">
-					<label for="University"> University :</label>
-					{{school}}
-				</div>
+					    <label for="Gender"> Gender:</label>
+					    {{gender}}
+				    </div>
+
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_bio">Biography</button>
 
 				<!-- Modal 1 -->
@@ -87,7 +88,7 @@
 									<h4 class="modal-title">Biography</h4>
 								</div>
 								<div class="modal-body">
-									{{Biography}}
+									{{biography}}
 								</div>
 							</div>
 						</div>
@@ -95,7 +96,7 @@
 				</div>
 			</div>
 			<div class="boxRight">
-				<center><label>Erasmus programm</label></center>
+				<center><label>Studies</label></center>
 				<br/>
 
 				<!-- <div class="form-group">
@@ -107,6 +108,12 @@
 					<label for="City">City :</label>
 					{{dest}}
 				</div>
+
+        <div class="form-group">
+          <label for="University"> Coming University:</label>
+          {{school}}
+        </div>
+
 			</div>
 		</div>
 	</body>
