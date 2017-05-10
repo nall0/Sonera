@@ -60,7 +60,7 @@
 				<center>Search a student by his/her destination and origin country (optionnal) by enter information in the Search bar</center>
 				<p> Results : <br>
 					{% for u in result_list %}
-					{{u}}
+					{{u.first_name}} {{u.last_name}} {{u.country}}
 					{% endfor %}
 				</p>
 		</div>
