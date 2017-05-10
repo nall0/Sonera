@@ -5,19 +5,29 @@
         <title>Sonera - Home</title>
     </head>
 
-    <body>
-		<p>Hello {{first_name}} {{last_name}} !
-		Your email is {{ email }}. Don't forget it, you'll need it to login ! </p>
-    <p>My profile : <a href="profile" title="Profile"> Profile </a> </p>
-		<form action="/getSearch" method="POST">
-		<strong> Search a student by his/her destination and origin country (optionnal) :</strong>
-        <p>
-            <input type="text" name="search_dest">
-            <input type="text" name="search_country">
-            <input type="submit" value="search">
-        </p>
-      </form>
+		<body>
+			<p>Hello {{first_name}} {{last_name}} !
+				Your email is {{ email }}. Don't forget it, you'll need it to login ! </p>
+			<p>My profile : <a href="profile" title="Profile"> Profile </a> </p>
+			<form action="/getSearch" method="POST">
+				<strong> Search a student by his/her destination and origin country (optionnal) :</strong>
+				<p>
+					<input type="text" name="search_dest">
+					<input type="text" name="search_country">
+					<input type="submit" value="search">
+				</p>
+			</form>
 
+<<<<<<< HEAD
+			<strong>Results : </strong>
+			<p> {% if resultFound %}
+					{% for u in userList %}
+					{{u}}
+					{% endfor %}
+					{% endif %}
+			</p>
+		</body>
+=======
     <strong>Results : </strong>
         <p>{% if resultFound %}
             {% for u in result_list %}
@@ -27,6 +37,6 @@
         </p>
 
     </body>
+>>>>>>> 104bc1c3f11b076c1f0e6618acbffedbee6f5e57
 	<a href="/logout">[logout]</a>
-
 </html>

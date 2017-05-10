@@ -1,45 +1,45 @@
-<!-- Quand on utilise un élément "form", une propriété portant le même nom que l'attribut "name" de notre formulaire est créée dans le foutu "$scope" permettant de vérifier que le formulaire est valide (si tous les champs "required" sont remplis). J'utilise la propriété "$valid" du formulaire pour vérifier qu'il est valide et que l'on peut définir la propriété "submitted" sur "true". Et tant que c'est pas true on peut pas envoyer le formulaire pour créer un nouvelle utilisateur. D'où le petit encadré du bas qui s'affiche quand on a envoyé notre formulaire pour montrer qu'il a bien été envoyé quoi -->
-
-
 <!DOCTYPE html>
 <html data-ng-app="myApp">   <!--html lié à notre app angular-->
     <head>
        <meta charset="utf-8" />
 
        <title>Sonera Homepage</title> <!--tire de la page-->
+
        <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
-       <script src="main.js"></script>
+       <script src="/static/main.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
-			 <script src="../build/js/countrySelect.min.js"></script>
+
+			 <script src="/build/js/countrySelect.min.js"></script>
+			 <script src="bower_components/angular-country-picker/country-picker.js"></script>
+			 <script src="node_modules/angular-country-picker/country-picker.js"></script>
 
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 			 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 			 <link rel="stylesheet" href="build/css/countrySelect.min.css">
-			 <link rel="stylesheet" href="/build/css/demo.css">
+			 <link rel="stylesheet" href="/static/build/css/demo.css">
 			 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-			 <link rel="stylesheet" href="../build/css/demo.css">
 
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<script>
-		    function Ctrl($scope) {
-		        $scope.text = 'abc@example.com';
-		    }
-		</script>
+			 <script>
+				  function Ctrl($scope) {
+				      $scope.text = 'abc@example.com';
+				  }
+			 </script>
 
-		<!-- création de la boite pour se créer un compte -->
-        <style type="text/css">
-            .box1
-            {
-                width:500px;
-                margin:100px auto auto auto;
-                border:1px solid #dedede;
-                border-radius:5px;
-                padding:20px;
-            }
+			 <!-- création de la boite pour se créer un compte -->
+       <style type="text/css">
+       		.box1
+          {
+       	 	  width:500px;
+            margin:100px auto auto auto;
+            border:1px solid #dedede;
+            border-radius:5px;
+            padding:20px;
+          }
             .center
             {
                 text-align:center;
@@ -75,44 +75,35 @@
               <form action="/signup" method="POST">
 
 									<label for="email">Email:</label></br>
-									<input name="email" type="email" data-ng-model="form.email" class="form-control"/></br>
+									<input name="email" type="email" data-ng-model="form.email" class="form-control" required="required"/></br>
 
 									<label for="first_name">First name:</label></br>
-                  <input name = "first_name" type="text" data-ng-model="form.first_name" class="form-control" required="required" data-ng-disabled="!form.email"/></br>
+                  <input name = "first_name" type="text" data-ng-model="form.first_name" class="form-control" required/></br>
 
 									<label for="last_name">Last name:</label></br>
-                  <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required data-ng-disabled="!form.first_name"/></br>
+                  <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required /></br>
 
-                  <!--<label for="password_sigup">Password:</label></br>
-                  <input type="password" name="password_sigup" placeholder="password..." class="form-control" data-ng-model="form.password" required="required" data-ng-disabled="!form.last_name"/></br>-->
-
-                  <!--<input type="password" name="passwordConfirmation" placeholder="confirm password..." class="form-control" data-ng-model="form.passwordConfirmation" password-confirm match-target="password_sigin" required="required" data-ng-disabled="!form.password"/></br>
-                  <span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
-                  <span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>-->
-
-
-                  <form role="form" name="myForm" novalidate>
 					  			<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
 										<label for="password_sigup">Password:</label>
-										<input class="form-control" type="password" name="password_sigup" placeholder="password..." data-ng-model="form.password" required data-ng-disabled="!form.last_name"/>
+										<input class="form-control" type="password" name="password_sigup" placeholder="password..." data-ng-model="form.password" required />
 										<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
 					 				</div>
 						 			<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
 										<label for="passwordConfirmation">Confirm Password:</label>
-										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" password-confirm match-target="password" data-ng-disabled="!form.password"/>
+										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" password-confirm match-target="password"/>
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
 										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
 					  			</div>
 
                   <label for="biography">You can say something about yourself:</label></br>
-                  <input name="biography" type="text" name="biography" data-ng-model="form.biography" required class="form-control" data-ng-disabled="!form.passwordConfirmation"></br>
+                  <input name="biography" type="text" name="biography" data-ng-model="form.biography" required class="form-control"></br>
 
 									<label for="gender">Gender:</label></br>
-									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography" checked>
-									<label>Male</label>
+									<label>Male</label></br>
+									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" checked></br>
 
-									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required" data-ng-disabled="!form.biography">
 									<label>Female</label></br>
+									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required"></br>
 
                   <!--<div class="form-group">
   								    <label for="s-nationality">Nationality:</label></br>
@@ -138,13 +129,12 @@
 								</div>-->
 
                 <label for="school">School:</label></br>
-                <input type="text" name="school" data-ng-model="form.school" required class="form-control" required data-ng-disabled="!form.gender"/>
-
+                <input type="text" name="school" data-ng-model="form.school" required class="form-control"/>
                 <br></br>
 
                 <div class="modal-footer">
                   <div class="center">
-                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" data-ng-disabled="!form.school">Sign Up</button>
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" >Sign Up</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       						</div>
     						</div>
@@ -178,8 +168,9 @@
 							<!--<span class="help-block" ng-show="myForm.password_sigin.$error.required">Required</span>-->
 
 						<div class="center">
-       			 	       <button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>
-              			   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       			  <button class="btn btn-primary" data-ng-click="submit()">Sign In</button>              
+       			  <!--<button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>-->
+            	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 						</form>
 					</div>
