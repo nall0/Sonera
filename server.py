@@ -25,13 +25,14 @@ def checkEmail(email):
 def userSearch(dest, country=None):
 	global userList
 	from users import User
-	if country == None:
-		userList = User.query.filter(User.dest == dest)
-		resultFound=True
-	else:
-		userList = User.query.filter(User.dest == dest and User.country == country)
-		resultFound=True
+	userList = User.query.filter(User.gender == dest)
+	resultFound=True
 
+	print("**********RESULT*******")
+	for u in userList:
+		print("                resss = ")
+		print(u.first_name)
+	print("***********************")
 
 # ------- Function countNbUsers --------------------
 def countNbUsers():
@@ -53,6 +54,7 @@ def addUser(email, first_name, last_name, password, biography, g , c, sch):
 # ---------------- Methode which test the password ------------------------
 def pw_verification(email, password):
 	from users import User
+	print("************Session[email]  =  "+session['email'])
 	current_user = User.query.filter(User.email == session['email']).first()
 	real_password = current_user.password
 	if real_password == password:

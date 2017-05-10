@@ -22,7 +22,7 @@ class User(Base):
 		self.biography = biography
 		self.gender = gender
 		self.country = country
-		self.dest = None
+		self.dest = ""
 		self.school = s
 
 	def __repr__(self):
