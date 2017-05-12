@@ -132,13 +132,17 @@ def profile():
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
-@app.route('/otherProfile')
-def otherProfile():
-	return render_template('profileOfOthers.html')
+@app.route('/user:<email>')
+def user(email):
+	from users import User
+	user_found = User.query.filter(User.email == email).first()
+	return render_template('profileOfOthers.html', email=user_found.email, first_name=user_found.first_name, last_name=user_found.last_name,
+		gender=user_found.gender, dest=user_found.dest, country=user_found.country, school=user_found.school)
 
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
-	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
+	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'],
+		country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
 @app.route('/getNewInfos', methods=['POST', 'GET'])
 def getNewInfos():
