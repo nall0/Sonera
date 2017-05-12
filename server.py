@@ -27,7 +27,7 @@ def userSearch(city, country):
 	res=[]
 	global resultFound
 	from users import User
-	userList = User.query.filter(User.dest == city and User.country == country)
+	userList = User.query.filter(User.dest == city.upper() and User.country == country.upper())
 	resultFound=True
 
 	for u in userList:
@@ -120,9 +120,9 @@ def signup():
 	session['last_name'] = escape(request.form['last_name'])
 	session['biography'] = escape(request.form['biography'])
 	session['gender'] = escape(request.form['gender'])
-	session['country'] = escape(request.form['country'])
+	session['country'] = escape(request.form['country']).upper()
 	session['school'] = escape(request.form['school'])
-	session['dest'] = escape(request.form['dest'])
+	session['dest'] = escape(request.form['dest']).upper()
 	if checkEmail(session['email']):
 		addUser(session['email'], session['first_name'], session['last_name'], session['password'], session['biography'], session['gender'], session['country'], session['school'], session['dest'])
 		session['id'] = nbUsers
@@ -133,22 +133,23 @@ def signup():
 def profile():
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
+	resultFound=False
 	search_dest=""
 	# display template
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
-		
-#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------		
-   
-#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------	
+
 
 @app.route('/user:<email>')
 def user(email):
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
 	search_dest=""
+	resultFound=False
 	# get infos in the database
 	from users import User
 	user_found = User.query.filter(User.email == email).first()
@@ -159,9 +160,11 @@ def user(email):
 def editProfile():
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
 	search_dest=""
-	
+	resultFound=False
+
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'],
 		country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
@@ -177,9 +180,9 @@ def getNewInfos():
 	current_user.last_name=session['last_name']
 	session['biography'] = escape(request.form['biography'])
 	current_user.biography=session['biography']
-	session['country'] = escape(request.form['country'])
+	session['country'] = escape(request.form['country']).upper()
 	current_user.country=session['country']
-	session['dest'] = escape(request.form['dest'])
+	session['dest'] = escape(request.form['dest']).upper()
 	current_user.dest=session['dest']
 	session['school'] = escape(request.form['school'])
 	current_user.school=session['school']
@@ -201,8 +204,17 @@ def getSearch():
 def home():
 	global userList
 	global search_dest
+	global resultFound
+	if resultFound:
+		txt = "for " + search_dest
+	else:
+		txt=""
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
-	 	email=session['email'], dest=search_dest, resultFound=resultFound, result_list=userList)
+	 	email=session['email'], dest=txt, resultFound=resultFound, result_list=userList)
+
+@app.route('/rapport')
+def rapport():
+	return render_template('rapport.html')
 # ------------------------------------------------------------------------------------------------
 
 
