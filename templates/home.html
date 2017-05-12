@@ -68,13 +68,6 @@
 				            <li class="active"><a href="#">Home</a></li>
 				            <li><a href="profile" title="Profile">Profile</a></li>
 				        </ul>
-				        <form action=/getSearch method="POST" role="search" class="navbar-form navbar-left">
-				            <div class="form-group">
-				                <input type="text" name="search_dest" placeholder="Search by destination" class="form-control" data-ng-model="form.search_dest" required="required">
-												<input type="text" name="search_country" placeholder="(optional) Origin country" class="form-control" data-ng-disabled="!form.search_dest">
-												<input type="submit" value="search">
-				            </div>
-				        </form>
 				        <ul class="nav navbar-nav navbar-right">
 										<li><a href="/rapport">About Us</a></li>
 				            <li><a href="/logout">Log Out</a></li>
@@ -82,7 +75,14 @@
 				    </div>
 				</nav>
 				<center>Search a student by his/her destination and (optionnal) origin country by enter information in the Search bar</center>
-				<div class="box1">
+        <form action=/getSearch method="POST" role="search" class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" name="search_dest" placeholder="Search by destination" class="form-control" data-ng-model="form.search_dest" required="required">
+                <input type="text" name="search_country" placeholder="(optional) Origin country" class="form-control" data-ng-disabled="!form.search_dest">
+                <input type="submit" value="search">
+            </div>
+        </form>
+        <div class="box1">
 				<h3><label> Results for {{dest}}:</label></h3></br>
 					{% for u in result_list %}
 						<li><a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br></li>
