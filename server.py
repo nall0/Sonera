@@ -31,7 +31,7 @@ def userSearch(city, country):
 	resultFound=True
 
 	for u in userList:
-		print(file:///root/Workspace/3TC/WEB/PROJET/Sonera/templates/rapport/rapportWork.html" ------------------ RES --------------")
+		print(" ------------------ RES --------------")
 		print(u.first_name)
 		print(" --------------------------------")
 		res.append(u.first_name)
