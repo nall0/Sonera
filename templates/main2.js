@@ -9,13 +9,16 @@ app.controller('myappCtrl', ['$scope', function($scope)
 	{
 		if ($scope.frm.$valid)
 		{
-		    $scope.submitted = true;
+			$scope.submitted = true;
 		}
 	};
 	$scope.password = null;
-  	$scope.passwordConfirmation = null;
-  	//$("#country_selector").countrySelect({});
+  $scope.passwordConfirmation = null;
 	$scope.EMAIL_REGEXP = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+	/*$scope.ctrlEmail = function()
+	{
+		$scope.text = 'abc@example.com';
+	};*/
         
 }]);
 
