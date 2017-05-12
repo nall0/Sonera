@@ -104,7 +104,7 @@
 				</nav>
 				<center>Search a student by his/her destination and origin country (optionnal) by enter information in the Search bar</center>
 				<div class="box1">
-				<label> Results :</label> </br>
+				<label> Results for {{dest}}:</label> </br>
 					{% for u in result_list %}
 						<a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br>
 					{% endfor %}
