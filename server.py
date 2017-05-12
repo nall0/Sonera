@@ -209,7 +209,7 @@ def home():
 		txt = "for " + search_dest
 	else:
 		txt=""
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
+	return render_template('home.php', first_name=session['first_name'], last_name=session['last_name'],
 	 	email=session['email'], dest=txt, resultFound=resultFound, result_list=userList)
 
 @app.route('/rapport')

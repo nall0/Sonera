@@ -65,7 +65,6 @@
 				        <ul class="nav navbar-nav">
 				            <li class="active"><a href="home">Home</a></li>
 				            <li><a href="editProfile" title="editProfile"> Edit Profile</a></li>
-										<li><center><h4>Please enter your new personnal informations below</h4></center><li/>
 				        </ul>
 				        <ul class="nav navbar-nav navbar-right">
 				            <li><a href="/logout">Log Out</a></li>
@@ -77,22 +76,23 @@
 				</nav>
 			</div>
       <div class="box1">
+              <center><label><h4>Please enter your new personnal informations below</h4></label></center>
               <form action="/getNewInfos" method="POST">
 
                 <label>First name</label><br>
-                <input type="text" value={{first_name | safe}} name="first_name" class="form-control"><br>
+                <textarea type="text" value={{first_name | safe}} name="first_name" class="form-control" rows="1">{{first_name | safe}}</textarea><br>
                 <label>Last name</label><br>
-                <input type="text" value={{last_name | safe}} name="last_name" class="form-control"><br>
+                <textarea type="text" value={{last_name | safe}} name="last_name" class="form-control" rows="1">{{last_name | safe}}</textarea><br>
                 <label>Password</label><br>
                 <input type="password" value={{password | safe}} name="password_sigup" class="form-control"><br>
                 <label>Country</label><br>
-                <input type="text" value={{country | safe}} name="country" class="form-control"><br>
+                <textarea type="text" value={{country | safe}} name="country" class="form-control" rows="1">{{country | safe}}</textarea><br>
                 <label>School:</label></br>
-                <input type="text" value={{school | safe}} name="school" class="form-control"><br>
+                <textarea type="text" value={{school | safe}} name="school" class="form-control" rows="1">{{school | safe}}</textarea><br>
                 <label>Destination</label><br>
-                <input type="text" value={{dest | safe}} name="dest" class="form-control"><br>
+                <textarea type="text" value={{dest | safe}} name="dest" class="form-control" rows="1">{{dest | safe}}</textarea><br>
                 <label>Biography</label><br>
-                <textarea type="text" name="biography" class="style_bio" ROWS="5" COLS="50">{{biography | safe}}</textarea>
+                <textarea type="text" name="biography" class="style_bio" ROWS="4" COLS="50">{{biography | safe}}</textarea>
 
                 <center><input type="submit" value="submit" class="btn btn-primary"></center>
               </form>
