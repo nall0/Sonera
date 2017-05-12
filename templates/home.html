@@ -33,8 +33,11 @@
 			.i-am-centered { margin:100px auto auto auto; padding:20px; width: 90%;}
 			 .box1
 			 {
+				 margin-top:2px;
+				 margin-right:300px;
+				 margin-bottom:2em;
+				 margin-left:300px;
 				 width:500px;
-				 margin:50px auto auto auto;
 				 border:1px solid #dedede;
 				 border-radius:5px;
 				 padding:20px;
@@ -43,7 +46,7 @@
 			 .box2
 			 {
 				 width:500px;
-				 margin:200px auto auto auto;
+				 margin:250px auto auto auto;
 				 border:1px solid #dedede;
 				 border-radius:5px;
 				 padding:20px;
@@ -83,15 +86,16 @@
 				        </ul>
 				    </div>
 				</nav>
-				<div container>
+				<div class="container">
 					<form action=/getSearch method="POST" role="search" class="navbar-form navbar-left">
 						<div class="box1">
 							<center>
-							<h3>Search a student</h3>
+							<h3><label>Search a student</label></h3>
 								<input type="text" name="search_dest" placeholder="Search by destination" class="form-control" data-ng-model="form.search_dest" required="required">
 								<input type="text" name="search_country" placeholder="Nationality (optional)" class="form-control" data-ng-disabled="!form.search_dest">
 								<br>
-								<input type="submit" value="search">
+								<br>
+								<button class="btn btn-primary" data-ng-click="submit()">Search</button>
 							</center>
 						</div>
 					</form>
