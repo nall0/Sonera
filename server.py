@@ -141,9 +141,6 @@ def profile():
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
-#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------
-
-#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------
 
 @app.route('/user:<email>')
 def user(email):
@@ -214,6 +211,10 @@ def home():
 		txt=""
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
 	 	email=session['email'], dest=txt, resultFound=resultFound, result_list=userList)
+
+@app.route('/rapport')
+def rapport():
+	return render_template('rapport.html')
 # ------------------------------------------------------------------------------------------------
 
 
