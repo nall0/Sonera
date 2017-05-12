@@ -133,7 +133,9 @@ def signup():
 def profile():
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
+	resultFound=False
 	search_dest=""
 	# display template
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
@@ -147,8 +149,10 @@ def profile():
 def user(email):
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
 	search_dest=""
+	resultFound=False
 	# get infos in the database
 	from users import User
 	user_found = User.query.filter(User.email == email).first()
@@ -159,8 +163,10 @@ def user(email):
 def editProfile():
 	# clear list of results
 	global userList
+	global resultFound
 	userList=[]
 	search_dest=""
+	resultFound=False
 
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'],
 		country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
@@ -201,8 +207,13 @@ def getSearch():
 def home():
 	global userList
 	global search_dest
+	global resultFound
+	if resultFound:
+		txt = "for " + search_dest
+	else:
+		txt=""
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
-	 	email=session['email'], dest=search_dest, resultFound=resultFound, result_list=userList)
+	 	email=session['email'], dest=txt, resultFound=resultFound, result_list=userList)
 # ------------------------------------------------------------------------------------------------
 
 
