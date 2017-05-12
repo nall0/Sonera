@@ -132,6 +132,12 @@ def profile():
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
+		
+#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------		
+   
+#------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------	
+
+
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
