@@ -21,13 +21,13 @@ def checkEmail(email):
 	return True
 
 # --------- Function
-def userSearch(city):
+def userSearch(city, country):
 	res=[]
 	global resultFound
 	from users import User
-	userList = User.query.filter(User.dest == city)
-
+	userList = User.query.filter(User.dest == city and User.country == country)
 	resultFound=True
+
 	for u in userList:
 		print(" ------------------ RES --------------")
 		print(u.first_name)
@@ -132,6 +132,10 @@ def profile():
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
+@app.route('/otherProfile')
+def otherProfile():
+	return render_template('profileOfOthers.html')
+
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
@@ -163,7 +167,7 @@ def getSearch():
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	userList = userSearch(search_dest)
+	userList = userSearch(search_dest, search_country)
 
 	return redirect('/home')
 
