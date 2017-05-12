@@ -106,7 +106,7 @@
 				<div class="box1">
 				<label> Results :</label> </br>
 					{% for u in result_list %}
-						<a href="/user/{{u.email}}">{{u.first_name}} {{u.last_name}} {{u.country}}</a>
+						<a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br>
 					{% endfor %}
 				</div>
 		</div>

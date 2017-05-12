@@ -137,7 +137,7 @@ def user(email):
 	from users import User
 	user_found = User.query.filter(User.email == email).first()
 	return render_template('profileOfOthers.html', email=user_found.email, first_name=user_found.first_name, last_name=user_found.last_name,
-		gender=user_found.gender, dest=user_found.dest, country=user_found.country, school=user_found.school)
+		gender=user_found.gender, dest=user_found.dest, country=user_found.country, school=user_found.school, biography=user_found.biography)
 
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
