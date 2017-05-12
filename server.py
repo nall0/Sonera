@@ -153,6 +153,11 @@ def user(email):
 
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
+	# clear list of results
+	global userList
+	userList=[]
+	search_dest=""
+	
 	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'],
 		country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
