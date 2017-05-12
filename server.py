@@ -31,7 +31,7 @@ def userSearch(city, country):
 	resultFound=True
 
 	for u in userList:
-		print(" ------------------ RES --------------")
+		print(file:///root/Workspace/3TC/WEB/PROJET/Sonera/templates/rapport/rapportWork.html" ------------------ RES --------------")
 		print(u.first_name)
 		print(" --------------------------------")
 		res.append(u.first_name)
@@ -138,14 +138,11 @@ def profile():
 	# display template
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
-
-<<<<<<< HEAD
 		
 #------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------		
    
 #------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------	
 
-=======
 @app.route('/user:<email>')
 def user(email):
 	# clear list of results
@@ -157,7 +154,6 @@ def user(email):
 	user_found = User.query.filter(User.email == email).first()
 	return render_template('profileOfOthers.html', email=user_found.email, first_name=user_found.first_name, last_name=user_found.last_name,
 		gender=user_found.gender, dest=user_found.dest, country=user_found.country, school=user_found.school, biography=user_found.biography)
->>>>>>> bf99686f87746cf95c95bd607460128709f80dee
 
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
