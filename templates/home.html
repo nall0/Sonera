@@ -11,6 +11,21 @@
 					integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="/static/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+
+		<script src="/build/js/countrySelect.min.js"></script>
+		<script src="bower_components/angular-country-picker/country-picker.js"></script>
+		<script src="node_modules/angular-country-picker/country-picker.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="/static/build/css/demo.css">
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen">
 		<style type="text/css">
 			.navbar{
 				margin-top: 20px;
@@ -25,11 +40,10 @@
 				    <div class="navbar-header">
 				        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
 				            <span class="sr-only">Toggle navigation</span>
-				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span><script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
 				            <span class="icon-bar"></span>
 				            <span class="icon-bar"></span>
 				        </button>
-				        <a href="#" class="navbar-brand">{{first_name}} {{last_name}}</a>
 				    </div>
 				    <!-- Collection of nav links, forms, and other content for toggling -->
 				    <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -55,6 +69,20 @@
 				        <ul class="nav navbar-nav navbar-right">
 				            <li><a href="/logout">Log Out</a></li>
 				        </ul>
+				        <ul class="nav navbar-nav navbar-right">
+				        <li class="dropdown">
+				          <a data-toggle="dropdown" class="dropdown-toggle" href="Report">Web Report<b class="caret"></b></a>
+				          <ul role="menu" class="dropdown-menu">
+				            <li><a href="Introduction">Introduction</a></li>
+				            <li><a href="Front_End_Architecture">Front End Architecture</a></li>
+				            <li><a href="Back_End_Architecture">Back End Architecture</a></li>
+				            <li><a href="Database_Architecture">Database Architecture</a></li>
+				            <li><a href="Conclusion">Conclusion</a></li>
+				            <li class="divider"></li>
+				        		<li><a href="/Note">Note</a></li>
+				        	</ul>
+				        </li>
+				        </ul>	
 				    </div>
 				</nav>
 				<center>Search a student by his/her destination and origin country (optionnal) by enter information in the Search bar</center>

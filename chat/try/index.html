@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+    <script src="/static/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+
+    <script src="/build/js/countrySelect.min.js"></script>
+		<script src="bower_components/angular-country-picker/country-picker.js"></script>
+		<script src="node_modules/angular-country-picker/country-picker.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="/static/build/css/demo.css">
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<script type="text/javascript">
+			window.addEventListener("load", function() {
+				// create websocket instance
+				var mySocket = new WebSocket("ws://localhost:8080/ws");
+				// add event listener reacting when message is received
+				mySocket.onmessage = function (event) {
+					var output = document.getElementById("output");
+					// put text into our output div
+					output.textContent = event.data;
+				};
+				var form = document.getElementsByClassName("foo");
+				var input = document.getElementById("input");
+				form[0].addEventListener("submit", function (e) {
+					// on forms submission send input to our server
+					input_text = input.value;
+					mySocket.send(input_text);
+					e.preventDefault()
+				})
+			});
+		</script>
+		<style type="text/css">
+            .box1
+            {
+                width:500px;
+                margin:10px auto auto auto;
+                border:1px solid #dedede;
+                border-radius:5px;
+                padding:20px;
+            }
+            .center
+            {
+                text-align:center;
+            }
+            .margin-right-10
+            {
+                margin-right:10px;
+            }
+		</style>
+	</head>
+	
+	<body>
+		<div class="box1">
+			<form class="foo">
+			<input id="input" class="form-control"></input></br>
+				<input type="submit"></input></br>
+			</form>
+			</br>
+			<div id="output" class="form-control"></div></br>
+		</div>
+	</body>
+</html>
+
