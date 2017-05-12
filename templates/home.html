@@ -85,7 +85,7 @@
         <div class="box1">
 				<h3><label> Results for {{dest}}:</label></h3></br>
 					{% for u in result_list %}
-						<li><a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br></li>
+						<li><a href="/user:{{u.email}}">{{u.first_name | safe}} {{u.last_name | safe}} - {{u.country}}</a><br></li>
 					{% endfor %}
 				</div>
 		</div>

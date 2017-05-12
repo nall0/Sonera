@@ -80,19 +80,19 @@
               <form action="/getNewInfos" method="POST">
 
                 <label>First name</label><br>
-                <input type="text" value={{first_name}} name="first_name" class="form-control"><br>
+                <input type="text" value={{first_name | safe}} name="first_name" class="form-control"><br>
                 <label>Last name</label><br>
-                <input type="text" value={{last_name}} name="last_name" class="form-control"><br>
+                <input type="text" value={{last_name | safe}} name="last_name" class="form-control"><br>
                 <label>Password</label><br>
-                <input type="password" value={{password}} name="password_sigup" class="form-control"><br>
+                <input type="password" value={{password | safe}} name="password_sigup" class="form-control"><br>
                 <label>Country</label><br>
-                <input type="text" value={{country}} name="country" class="form-control"><br>
+                <input type="text" value={{country | safe}} name="country" class="form-control"><br>
                 <label>School:</label></br>
-                <input type="text" value={{school}} name="school" class="form-control"><br>
+                <input type="text" value={{school | safe}} name="school" class="form-control"><br>
                 <label>Destination</label><br>
-                <input type="text" value={{dest}} name="dest" class="form-control"><br>
+                <input type="text" value={{dest | safe}} name="dest" class="form-control"><br>
                 <label>Biography</label><br>
-                <textarea type="text" name="biography" class="style_bio" ROWS="5" COLS="50">{{biography}}</textarea>
+                <textarea type="text" name="biography" class="style_bio" ROWS="5" COLS="50">{{biography | safe}}</textarea>
 
                 <center><input type="submit" value="submit" class="btn btn-primary"></center>
               </form>

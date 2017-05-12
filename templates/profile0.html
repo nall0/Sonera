@@ -73,7 +73,7 @@
 				</nav>
 		</div>
 
-		<center><h1><strong>{{first_name}} {{last_name}}</strong></h1></center>
+		<center><h1><strong>{{first_name | safe}} {{last_name | safe}}</strong></h1></center>
 
 		<div class="container"> <!-- présentation personnelle-->
 			<div class="boxLeft">
@@ -82,12 +82,12 @@
 
 		        <div class="form-group">
 		          <label for="Email">Email :</label>
-		          {{email}}
+		          {{email | safe}}
 		        </div>
 
     				<div class="form-group"> <!-- class="form-group" pour avoir une case et un titre -->
     					<label for="Nationality">Nationality :</label> <!-- label pour le titre de la case de dessous-->
-    					{{country}}
+    					{{country | safe}}
     				</div>
 
 		        <div class="form-group">
@@ -108,7 +108,7 @@
 									<h4 class="modal-title">Biography</h4>
 								</div>
 								<div class="modal-body">
-									{{biography}}
+									{{biography | safe}}
 								</div>
 							</div>
 						</div>
@@ -126,12 +126,12 @@
 
 				<div class="form-group">
 					<label for="Dest">Erasmus destination :</label>
-					{{dest}}
+					{{dest | safe}}
 				</div>
 
         <div class="form-group">
           <label for="University"> Coming University:</label>
-          {{school}}
+          {{school | safe}}
         </div>
 
 			</div>
