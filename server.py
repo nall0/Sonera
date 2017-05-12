@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from flask import *
 from sqlalchemy import *
 from sqlalchemy.orm import *
@@ -5,12 +7,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import *
 from database import db_session
 
-
 # website for SQLAlchemy+Flask (declarative base) : http://flask.pocoo.org/docs/0.12/patterns/sqlalchemy/
 
 nbUsers=0
 resultFound=False
 userList = []
+search_dest=""
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
@@ -21,13 +23,13 @@ def checkEmail(email):
 	return True
 
 # --------- Function
-def userSearch(city):
+def userSearch(city, country):
 	res=[]
 	global resultFound
 	from users import User
-	userList = User.query.filter(User.dest == city)
-
+	userList = User.query.filter(User.dest == city and User.country == country)
 	resultFound=True
+
 	for u in userList:
 		print(" ------------------ RES --------------")
 		print(u.first_name)
@@ -129,18 +131,43 @@ def signup():
 
 @app.route('/profile')
 def profile():
+	# clear list of results
+	global userList
+	userList=[]
+	search_dest=""
+	# display template
 	return render_template('profile0.html', email=session['email'], first_name=session['first_name'], last_name=session['last_name'], biography=session['biography'],
 		country=session['country'], school=session['school'], gender=session['gender'], dest=session['dest'])
 
+<<<<<<< HEAD
 		
 #------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------		
    
 #------------------------------------------ROUTE RAPPORT DEPUIS PROFILE--------------------------------------------------------	
 
+=======
+@app.route('/user:<email>')
+def user(email):
+	# clear list of results
+	global userList
+	userList=[]
+	search_dest=""
+	# get infos in the database
+	from users import User
+	user_found = User.query.filter(User.email == email).first()
+	return render_template('profileOfOthers.html', email=user_found.email, first_name=user_found.first_name, last_name=user_found.last_name,
+		gender=user_found.gender, dest=user_found.dest, country=user_found.country, school=user_found.school, biography=user_found.biography)
+>>>>>>> bf99686f87746cf95c95bd607460128709f80dee
 
 @app.route('/editProfile', methods=['POST', 'GET'])
 def editProfile():
-	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'], country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
+	# clear list of results
+	global userList
+	userList=[]
+	search_dest=""
+	
+	return render_template('editProfile.html', first_name=session['first_name'], last_name=session['last_name'], password=session['password'],
+		country=session['country'], school=session['school'], biography=session['biography'], dest=session['dest'])
 
 @app.route('/getNewInfos', methods=['POST', 'GET'])
 def getNewInfos():
@@ -165,18 +192,21 @@ def getNewInfos():
 @app.route('/getSearch', methods=['POST', 'GET'])
 def getSearch():
 	global userList
+	global search_dest
 	userList = []
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
-	userList = userSearch(search_dest)
+	userList = userSearch(search_dest, search_country)
 
 	return redirect('/home')
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
 	global userList
-	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'], email=session['email'], resultFound=resultFound, result_list=userList)
+	global search_dest
+	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
+	 	email=session['email'], dest=search_dest, resultFound=resultFound, result_list=userList)
 # ------------------------------------------------------------------------------------------------
 
 
