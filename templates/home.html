@@ -31,7 +31,24 @@
 				margin-top: 20px;
 			}
 			.i-am-centered { margin:100px auto auto auto; padding:20px; width: 90%;}
-		</style>
+			 .box1
+			 {
+				 width:500px;
+				 margin:100px auto auto auto;
+				 border:1px solid #dedede;
+				 border-radius:5px;
+				 padding:20px;
+				 background-color: white;
+			 }
+				 .center
+				 {
+						 text-align:center;
+				 }
+				 .margin-right-10
+				 {
+						 margin-right:10px;
+				 }
+		 </style>
 	</head>
 	<body>
 		<div class="container">
@@ -82,14 +99,15 @@
 				        		<li><a href="/Note">Note</a></li>
 				        	</ul>
 				        </li>
-				        </ul>	
+				        </ul>
 				    </div>
 				</nav>
 				<center>Search a student by his/her destination and origin country (optionnal) by enter information in the Search bar</center>
-				<p> Results : <br>
+				<div class="box1">
+				<label> Results :</label> </br>
 					{% for u in result_list %}
-					{{u.first_name}} {{u.last_name}} {{u.country}}
+						<a href="/user/{{u.email}}">{{u.first_name}} {{u.last_name}} {{u.country}}</a>
 					{% endfor %}
-				</p>
+				</div>
 		</div>
 	</body>
