@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sonera Home</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+					integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="/static/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script data-require="angular.js@1.2.14" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+
+		<script src="/build/js/countrySelect.min.js"></script>
+		<script src="bower_components/angular-country-picker/country-picker.js"></script>
+		<script src="node_modules/angular-country-picker/country-picker.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="build/css/countrySelect.min.css">
+		<link rel="stylesheet" href="/static/build/css/demo.css">
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+		<style type="text/css">
+			.navbar{
+				margin-top: 20px;
+			}
+			.i-am-centered { margin:100px auto auto auto; padding:20px; width: 90%;}
+			 .box1
+			 {
+				 width:500px;
+				 margin:100px auto auto auto;
+				 border:1px solid #dedede;
+				 border-radius:5px;
+				 padding:20px;
+				 background-color: white;
+			 }
+				 .center
+				 {
+						 text-align:center;
+				 }
+				 .margin-right-10
+				 {
+						 margin-right:10px;
+				 }
+		 </style>
+	</head>
+	<body>
+		<div class="container">
+				<nav role="navigation" class="navbar navbar-inverse">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				            <span class="sr-only">Toggle navigation</span>
+				            <span class="icon-bar"></span><script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				        </button>
+				    </div>
+				    <!-- Collection of nav links, forms, and other content for toggling -->
+				    <div id="navbarCollapse" class="collapse navbar-collapse">
+				        <ul class="nav navbar-nav">
+				            <li class="active"><a href="#">Home</a></li>
+				            <li><a href="profile" title="Profile">Profile</a></li>
+				        </ul>
+				        <form action=/getSearch method="POST" role="search" class="navbar-form navbar-left">
+				            <div class="form-group">
+				                <input type="text" name="search_dest" placeholder="Search by destination" class="form-control" data-ng-model="form.search_dest" required="required">
+												<input type="text" name="search_country" placeholder="(optional) Origin country" class="form-control" data-ng-disabled="!form.search_dest">
+												<input type="submit" value="search">
+				            </div>
+				        </form>
+				        <ul class="nav navbar-nav navbar-right">
+										<li><a href="/rapport">About Us</a></li>
+				            <li><a href="/logout">Log Out</a></li>
+				        </ul>
+				    </div>
+				</nav>
+				<center>Search a student by his/her destination and (optionnal) origin country by enter information in the Search bar</center>
+				{% if result_list != [] %}
+					<div class="box1">
+					<h3><label> {{resultBoxTitle}}</label></h3></br>
+						{% for u in result_list %}
+							<li><a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br></li>
+						{% endfor %}
+					</div>
+				{% endif %}
+		</div>
+	</body>
