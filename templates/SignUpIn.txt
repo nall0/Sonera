@@ -52,7 +52,7 @@
         </style>
     </head>
 
-    <body data-ng-controller="myappCtrl">
+    <body>
       <div class="box1">
       <div class="container">
 
@@ -62,6 +62,7 @@
 	  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Sign In</button>
 
 			<!--- Modal 1 ------------------------------------------------------------------------------------------------->
+			<div data-ng-controller="myappCtrl">
 			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -73,56 +74,69 @@
 
             <!-- Modal body-->
 						<div class="modal-body">
-              <form action="/signup" method="POST">
+              <form action="/signup" method="POST" class="form" name="myform">
 
 									<label for="email">Email:</label></br>
-									<input name="email" type="email" data-ng-model="form.email" class="form-control" required="required"/></br>
+									<input name="email" type="email" ng-model="email" class="form-control" required/></br>
+									<span class="help-block" ng-show="myform.email.$error.required"></span>
 
 									<label for="first_name">First name:</label></br>
-                  <input name = "first_name" type="text" data-ng-model="form.first_name" class="form-control" required/></br>
+                  <input name = "first_name" type="text" ng-model="first_name" class="form-control" required/></br>
+                  <span class="help-block" ng-show="myform.first_name.$error.required"></span>
 
 									<label for="last_name">Last name:</label></br>
-                  <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required /></br>
+                  <input name = "last_name" type="text" data-ng-model="last_name" class="form-control" required /></br>
+                  <span class="help-block" ng-show="myform.last_name.$error.required"></span>
 
-					  			<div class="form-group" ng-class="{error:!myform.password.$valid}">
+									<div ng-class="{error:!myform.password.$valid}" novalidate>
 										<label for="password_sigup">Password:</label>
-										<input class="form-control" type="text" name="password_sigup" placeholder="password..." data-ng-model="form.password_sigup" required />
 										<div>
-											<span class="help-block" ng-show="!!myform.password_sigup.$error.isBlank">Password Required.</span>
-											<span class="help-block" ng-show="!!myform.password_sigup.$error.isWeak">Must contain one upper &amp; lower case letter and a non-letter (number or symbol.)</span> 
-											<span class="help-block" ng-show="!!myform.password_sigup.$error.invalidLen">Must be 8-20 characters.</span>
+											<input type="password" id="password_sigup" name="password" class="form-control" ng-model="password" valid-password required/>
+											<div>
+												<span ng-show="!!myform.password.$error.isBlank">Password Required.</span>
+												<span ng-show="!!myform.password.$error.isWeak">Must contain one upper &amp; lower case letter and a non-letter (number or symbol.)</span> 
+												<span ng-show="!!myform.password.$error.invalidLen">Must be 8-20 characters.</span>
+											</div>
 										</div>
 									</div>
-						 			<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
+									<div class="control-group" ng-class="{error:!myform.password_c.$valid}">
 										<label for="passwordConfirmation">Confirm Password:</label>
-										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" match-target="password" valid-password-c/>
-										<div> 
-											<span class="help-block" ng-show="!!myform.passwordConfirmation.$error.isBlank">Confirmation Required.</span>
-											<span class="help-block" ng-show="!!myform.passwordConfirmation.$error.noMatch">Passwords don't match.</span>
+										<div>
+											<input type="password" id="passwordConfirmation" name="passwordConfirmation" ng-model="passwordConfirmation" class="form-control" valid-password-c required/>
+												<div> 
+													<span ng-show="!!myform.passwordConfirmation.$error.isBlank">Confirmation Required.</span>
+													<span ng-show="!!myform.passwordConfirmation.$error.noMatch">Passwords don't match.</span>
+											</div>
 										</div>
-					  			</div>		  			
+									</div>
 
                   <label for="biography">You can say something about yourself:</label></br>
-                  <input name="biography" type="text" name="biography" data-ng-model="form.biography" required class="form-control"></br>
+                  <input name="biography" type="text" name="biography" ng-model="biography" required class="form-control"></br>
+									<span class="help-block" ng-show="myform.biography.$error.required"></span>
 
 									<label for="gender">Gender:</label></br>
 									<label>Male</label></br>
-									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" checked></br>
+									<input name="gender" type="radio" value="Male" data-ng-model="myform.gender" required checked></br>
 
 									<label>Female</label></br>
-									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required"></br>
+									<input name="gender" type="radio" value="Female" data-ng-model="myform.gender" required></br>
 
                   <label for="country">Nationality :</label></br>
-                  <input name="country" type="text" class="form-control"/>
+                  <input name="country" type="text" class="form-control" ng-model="country" required/>
+                  <span class="help-block" ng-show="myform.country.$error.required"></span>
 
 		              <label for="school">School:</label></br>
-		              <input type="text" name="school" data-ng-model="form.school" required class="form-control"/>
+		              <input type="text" name="school" ng-model="school" required class="form-control"/>
+		              <span class="help-block" ng-show="myform.school.$error.required"></span>
+		              
 		              <label for="dest">Erasmus destination :</label></br>
-		              <input name="dest" type="text" class="form-control"/></br>
+		              <input name="dest" type="text" class="form-control" required ng-model="dest"/></br>
+		              <span class="help-block" ng-show="myform.dest.$error.required"></span>
 
 		              <div class="modal-footer">
 		                <div class="center">
-		                  <button class="btn btn-primary" ng-disabled="myForm.$invalid" >Sign Up</button>
+		                  <!--<button class="btn btn-primary" ng-disabled="myform.$invalid" >Sign Up</button>-->
+		                  <button class="btn btn-primary" data-ng-click="submit()">Sign Up</button>
 		                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		    						</div>
 		  						</div>
@@ -158,7 +172,6 @@
               <div class="modal-footer">
 						<div class="center">
        			  <button class="btn btn-primary" data-ng-click="submit()">Sign In</button>
-       			  <!--<button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>-->
             	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
             </div>
@@ -166,6 +179,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</body>
 </html>

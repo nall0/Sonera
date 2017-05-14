@@ -33,30 +33,29 @@
 				<div class="modal fade" id="myModal1" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
-						<!--
+						
 						<div class="modal-content">
 		          <div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Sign Up</h4>
 							</div>
 							<div>
-								<div class="modal-body">-->
-									<form action="/signup" method="POST">
-									
+								<div class="modal-body">
+									<form name="myform" class="form"  action="/signup" method="POST">
 										<label for="email">Email:</label></br>
-										<input name="email" type="email" data-ng-model="form.email" required="required"/></br>
+										<input name="email" type="email" data-ng-model="myform.email" required="required"/></br>
 
 										<label for="first_name">First name:</label></br>
-		                <input name = "first_name" type="text" data-ng-model="form.first_name" required/></br>
+		                <input name = "first_name" type="text" data-ng-model="myform.first_name" required/></br>
 
 										<label for="last_name">Last name:</label></br>
-		                <input name = "last_name" type="text" data-ng-model="form.last_name" required /></br>
+		                <input name = "last_name" type="text" data-ng-model="myform.last_name" required /></br>
 
-										<form  name="myform" class="form" >
+										
 											<div ng-class="{error:!myform.password.$valid}" novalidate>
-													<label for="inputPassword">Password:</label>
+												<label for="inputPassword">Password:</label>
 													<div>
-															<input type="text" id="inputPassword" name="password" ng-model="password" valid-password />
+															<input type="text" id="inputPassword" name="password" ng-model="password" valid-password required />
 															<div>
 																	<span ng-show="!!myform.password.$error.isBlank">Password Required.</span>
 																	<span ng-show="!!myform.password.$error.isWeak">Must contain one upper &amp; lower case letter and a non-letter (number or symbol.)</span> 
@@ -67,7 +66,7 @@
 											<div class="control-group" ng-class="{error:!myform.password_c.$valid}">
 												<label for="password_c">Confirm Password:</label>
 												<div>
-														<input type="text" id="password_c" name="password_c" ng-model="password_c" valid-password-c />
+														<input type="text" id="password_c" name="password_c" ng-model="password_c" valid-password-c required />
 															<div> 
 																<span ng-show="!!myform.password_c.$error.isBlank">Confirmation Required.</span>
 																<span ng-show="!!myform.password_c.$error.noMatch">Passwords don't match.</span>
@@ -75,23 +74,23 @@
 														</div>
 												</div>
 											</div>
-										</form>
+										
 										
 										<label for="biography">You can say something about yourself:</label></br>
-		                <input name="biography" type="text" name="biography" data-ng-model="form.biography" required ></br>
+		                <input name="biography" type="text" name="biography" data-ng-model="myform.biography" required ></br>
 
 										<label for="gender">Gender:</label></br>
 										<label>Male</label></br>
-										<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" checked></br>
+										<input name="gender" type="radio" value="Male" data-ng-model="myform.gender" required="required" checked></br>
 
 										<label>Female</label></br>
-										<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required"></br>
+										<input name="gender" type="radio" value="Female" data-ng-model="myform.gender" required="required"></br>
 										
 										<label for="country">Nationality :</label></br>
                   	<input name="country" type="text" />
                   	
                   	<label for="school">School:</label></br>
-				            <input type="text" name="school" data-ng-model="form.school" required />
+				            <input type="text" name="school" data-ng-model="myform.school" required />
 				            <label for="dest">Erasmus destination :</label></br>
 				            <input name="dest" type="text" /></br>
 
@@ -101,10 +100,10 @@
 				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				  						</div>
 										</div>
-									</form>
-								<!--</div>
+								</div>
 						</div>
-					</div>-->
+					</div>
+					</form>
 				</div>
 			</div>
 		</div>

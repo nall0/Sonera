@@ -37,6 +37,7 @@ angular.module('UserValidation', []).directive('validUsername', function () {
         }
     }
 });
+
 app.directive('validPassword', function () {
     return {
         require: 'ngModel',

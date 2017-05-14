@@ -6,7 +6,7 @@
        <title>Sonera Homepage</title> <!--tire de la page-->
 
        <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
-       <script src="/static/main.js"></script>
+       <script src="/static/main2.js"></script>
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -62,7 +62,7 @@
 	  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Sign In</button>
 
 			<!--- Modal 1 ------------------------------------------------------------------------------------------------->
-			<div data-ng-controller="main-controller">
+			<div data-ng-controller="myappCtrl">
 			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -74,79 +74,99 @@
 
             <!-- Modal body-->
 						<div class="modal-body">
-              <form action="/signup" method="POST">
+              <form action="/signup" method="POST" class="form" name="myform">
 
 									<label for="email">Email:</label></br>
-									<input name="email" type="email" data-ng-model="form.email" class="form-control" required="required"/></br>
+									<input name="email" type="email" ng-model="email" class="form-control" required/></br>
+									<span class="help-block" ng-show="myform.email.$error.required"></span>
 
 									<label for="first_name">First name:</label></br>
-                  <input name = "first_name" type="text" data-ng-model="form.first_name" class="form-control" required/></br>
+                  <input name = "first_name" type="text" ng-model="first_name" class="form-control" required/></br>
+                  <span class="help-block" ng-show="myform.first_name.$error.required"></span>
 
 									<label for="last_name">Last name:</label></br>
-                  <input name = "last_name" type="text" data-ng-model="form.last_name" class="form-control" required /></br>
+                  <input name = "last_name" type="text" data-ng-model="last_name" class="form-control" required /></br>
+                  <span class="help-block" ng-show="myform.last_name.$error.required"></span>
 
-					  			<div class="form-group" ng-class="{s'has-error':!myForm.password.$valid}">
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------Here is my problem to check his two passwords are matching------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+									<div class="form-group" ng-class="{error:!myform.password.$valid}" novalidate>
 										<label for="password_sigup">Password:</label>
-										<input class="form-control" type="password" name="password_sigup" placeholder="password..." data-ng-model="form.password" required />
-										<span class="help-block" ng-show="myForm.password.$error.required">Required</span>
-					 				</div>
-						 			<div class="form-group" ng-class="{'has-error':!myForm.passwordConfirmation.$valid}">
+										<div>
+											<input type="password" name="password_sigup" class="form-control" ng-model="password" valid-password required/>
+											<div>
+												<span ng-show="!!myform.password_sigup.$error.isBlank">Password Required.</span>
+												<span ng-show="!!myform.password_sigup.$error.isWeak">Must contain one upper &amp; lower case letter and a non-letter (number or symbol.)</span> 
+												<span ng-show="!!myform.password_sigup.$error.invalidLen">Must be 8-20 characters.</span>
+											</div>
+										</div>
+									</div>
+									<div class="control-group" ng-class="{error:!myform.passwordConfirmation.$valid}">
 										<label for="passwordConfirmation">Confirm Password:</label>
-										<input class="form-control" type="password" name="passwordConfirmation" data-ng-model="form.passwordConfirmation" password-confirm match-target="password"/>
-										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
-										<span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span>
-					  			</div>
+										<div>
+											<input type="password" name="passwordConfirmation" ng-model="passwordConfirmation" class="form-control" valid-password-c required/>
+												<div> 
+													<span ng-show="!!myform.passwordConfirmation.$error.isBlank">Confirmation Required.</span>
+													<span ng-show="!!myform.passwordConfirmation.$error.noMatch">Passwords don't match.</span>
+											</div>
+										</div>
+									</div>
+									
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------Here is the end of my problem------------------------------------------------------------------------------------------>
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 
                   <label for="biography">You can say something about yourself:</label></br>
-                  <input name="biography" type="text" name="biography" data-ng-model="form.biography" required class="form-control"></br>
+                  <input name="biography" type="text" name="biography" ng-model="biography" required class="form-control"></br>
+									<span class="help-block" ng-show="myform.biography.$error.required"></span>
 
 									<label for="gender">Gender:</label></br>
 									<label>Male</label></br>
-									<input name="gender" type="radio" value="Male" data-ng-model="form.gender" required="required" checked></br>
+									<input name="gender" type="radio" value="Male" data-ng-model="myform.gender" required checked></br>
 
 									<label>Female</label></br>
-									<input name="gender" type="radio" value="Female" data-ng-model="form.gender" required="required"></br>
-
-                  <!--<div class="form-group">
-  								    <label for="s-nationality">Nationality:</label></br>
-  										<input id="country_selector" type="text">
-  										<label for="country_selector" style="display:none;"></label>
-  								</div>
-  								<div class="form-item" style="display:none;">
-  									<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
-  									<label for="country_selector_code"></label>
-  								</div>
-  								<script>$("#country_selector").countrySelect({});</script>-->
+									<input name="gender" type="radio" value="Female" data-ng-model="myform.gender" required></br>
 
                   <label for="country">Nationality :</label></br>
-                  <input name="country" type="text" class="form-control"/>
-									<!--<input name="country_selector_code" type="text" id="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
-									<label for="country_selector_code"></label>-->
-								<!--<script>$("#country_selector").countrySelect({});</script>-->
+                  <input name="country" type="text" class="form-control" ng-model="country" required/>
+                  <span class="help-block" ng-show="myform.country.$error.required"></span>
 
-                <!-- AGE pas configuré dans le serveur pour le moment
-								<div class="form-group">
-									<label for="age">Age:</label>
-									<input name = "age" type="number" data-ng-model="form.age" class="form-control" type="number">
-								</div>-->
+		              <label for="school">School:</label></br>
+		              <input type="text" name="school" ng-model="school" required class="form-control"/>
+		              <span class="help-block" ng-show="myform.school.$error.required"></span>
+		              
+		              <label for="dest">Erasmus destination :</label></br>
+		              <input name="dest" type="text" class="form-control" required ng-model="dest"/></br>
+		              <span class="help-block" ng-show="myform.dest.$error.required"></span>
 
-                <label for="school">School:</label></br>
-                <input type="text" name="school" data-ng-model="form.school" required class="form-control"/>
-                <label for="dest">Erasmus destination :</label></br>
-                <input name="dest" type="text" class="form-control"/></br>
-
-                <div class="modal-footer">
-                  <div class="center">
-                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" >Sign Up</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      						</div>
-    						</div>
-							</form>
+		              <div class="modal-footer">
+		                <div class="center">
+		                  <!--<button class="btn btn-primary" ng-disabled="myform.$invalid" >Sign Up</button>-->
+		                  <button class="btn btn-primary" data-ng-click="submit()">Sign Up</button>
+		                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    						</div>
+		  						</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<!-- Modal 2 -------------------------------------------------------------------------------------------------->
 		<div class="modal fade" id="myModal2" role="dialog">
@@ -173,7 +193,6 @@
               <div class="modal-footer">
 						<div class="center">
        			  <button class="btn btn-primary" data-ng-click="submit()">Sign In</button>
-       			  <!--<button class="btn btn-primary" data-ng-click="submit()" ng-disabled="myForm.$invalid" data-ng-disabled="!form.email">Sign In</button>-->
             	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
             </div>
