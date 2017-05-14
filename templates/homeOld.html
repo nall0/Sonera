@@ -82,11 +82,13 @@
 				    </div>
 				</nav>
 				<center>Search a student by his/her destination and (optionnal) origin country by enter information in the Search bar</center>
-				<div class="box1">
-				<h3><label> Results for {{dest}}:</label></h3></br>
-					{% for u in result_list %}
-						<li><a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br></li>
-					{% endfor %}
-				</div>
+				{% if result_list != [] %}
+					<div class="box1">
+					<h3><label> Results for {{dest}}:</label></h3></br>
+						{% for u in result_list %}
+							<li><a href="/user:{{u.email}}">{{u.first_name}} {{u.last_name}} - {{u.country}}</a><br></li>
+						{% endfor %}
+					</div>
+				{% endif %}
 		</div>
 	</body>

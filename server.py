@@ -13,6 +13,7 @@ nbUsers=0
 resultFound=False
 userList = []
 search_dest=""
+search_country=""
 # ------- Function checkEmail --------------------
 def checkEmail(email):
 	from users import User
@@ -22,7 +23,7 @@ def checkEmail(email):
 			return False
 	return True
 
-# --------- Function
+# --------- Function userSearch
 def userSearch(city, country):
 	res=[]
 	global resultFound
@@ -192,6 +193,7 @@ def getNewInfos():
 def getSearch():
 	global userList
 	global search_dest
+	global search_country
 	userList = []
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
@@ -204,13 +206,17 @@ def getSearch():
 def home():
 	global userList
 	global search_dest
+	global search_country
 	global resultFound
 	if resultFound:
-		txt = "for " + search_dest
+		txt = "Students in " + search_dest
+		if search_country != "":
+			txt += " from "+search_country
+		txt += " :"
 	else:
 		txt=""
 	return render_template('home.html', first_name=session['first_name'], last_name=session['last_name'],
-	 	email=session['email'], dest=txt, resultFound=resultFound, result_list=userList)
+	 	email=session['email'], resultBoxTitle=txt, resultFound=resultFound, result_list=userList)
 
 @app.route('/rapport')
 def rapport():
