@@ -55,15 +55,70 @@
 					<div class="row">
 						<div class="col-md-12 well">
 							<legend id="paragraphe1" class="">Introduction</legend>
-							<p class="">TEXT BIATCH</p>
+							<p class="">
+								Notre projet WEB consiste à réaliser un réseau social destiné aux étudiants en échange Erasmus. 
+								L’objectif de Sonera est de mettre en contact des étudiants à l’étranger pendant leur échange universitaire. Les fonctionnalités suivantes ont donc été implantées :
+								<ul>
+									<li>Inscription</li>
+									<li>Connexion</li>
+									<li>Visualisation du profil de l’utilisateur</li>
+									<li>Modification du profil de l’utilisateur</li>
+									<li>Recherche d’autres utilisateurs en fonction de leur destination, ou de destination + nationalité</li>
+									<li>Visualisation du profil d’un autre utilisateur, trouvé grâce à la fonction de recherche</li>
+								</ul>
+								Chaque utilisateur indique un certain nombre d’informations, qui sont visibles sur son profil, et qui sont les suivantes:
+								<ul>
+									<li>Email (nécessaire pour s’identifier)</li>
+									<li>Mot de passe</li>
+									<li>Prénom et nom</li>
+									<li>Sexe</li>
+									<li>Ecole</li>
+									<li>Nationnalité</li>
+									<li>Ville de destination</li>
+									<li>Description</li>
+								</ul>
+								Ces informations ont pour but d’aider les utilisateurs à rechercher des étudiants ayant la même destination, et de visualiser les informations les concernant afin de rechercher par exemple un 								colocataire, ou simplement pour tisser des liens sociaux… Il n’y a plus qu’à contacter l’étudiant grâce à l’email indiqué sur son profil.
+							</p>
 						</div>
 						<div class="col-md-12 well">
-							<legend id="paragraphe2" class="">Back End</legend>
-							<p class="">TEXT BIATCH</p>
+							<legend id="paragraphe2" class="">Architecture</legend>
+							<p class="">Côté back-end, le serveur est codé en python à l’aide du framework Flask. Les donnés sont stockées dans une base de données accessible en SQL via le toolkit SQLAlchemy.
+													Le moteur de templates jinja2 permet de récupérer du contenu dynamique dans les pages HTML.
+													Côté front-end nous nous sommes servis de Angularjs, HTML et du CSS bootstrap. Angularjs nous sert principalement pour vérifier que le mot de passe est conforme à ce que nous souhaitons 													et qu’il soit un minimum sécurisé nous demandons 8 caractères minimums avec une majuscule et un symbole particulié. Le css bootstrap nous a permis de développer des views assez agréable 													pour la navigation dans notre site.
+							</p>
 						</div>
 						<div class="col-md-12 well">
 							<legend id="paragraphe3" class="">Front End</legend>
-							<p class="">TEXT BIATCH</p>
+							<p class="">Serveur en Python à l’aide du framework Flask
+													Nous avons choisi de coder le serveur en Flask pour plusieurs raisons. Tout d’abord, nous avions déjà eu des bases en TD, ce qui permettait de démarrer le développement du site sur de bonnes bases. De plus, le framework Flask étant très léger, il s'intègre parfaitement à Python. Cela est intéressant dans notre cas car Python s’avère être très pratique, notamment grâce à l’usage des dictionnaires permettant de stocker les informations relatives à une session. Notre choix est également lié au choix de la structure de données utilisées. Comme expliqué plus tard, nous utilisons SQL. Or, Python permet l’utilisation de bases de données relationnelles à l’aide du toolkit SQLalchemy. Développer le site web en Python, et plus précisément avec Flask et SQLAlchemy nous semblait donc être une solution idéale.
+													jinja2
+													Puisque nous utilisons Flask et Python pour le back-end, nous avons choisi le moteur de templates jinja2 pour afficher du contenu dynamique dans nos templates HTML.
+													Les variables passées en argument dans les fonctions render_templates(...) peuvent être manipulées et affichées au sein des fichiers HTML à l’aide d’une syntaxe très simple. On peut aussi bien lire des chaînes de caractères, que des entiers, mais aussi des classes personnelles.
+
+													Structure de données
+													La base de donnée de notre site doit pouvoir stocker l’ensemble des utilisateurs de la plateforme, ainsi que les informations relatives à chaque utilisateur (email, mot de passe, prénom, nom, sexe, école, nationalité, destination et description personnelle).
+													La solution du stockage via un système de fichiers ne garantissant pas l’intégrité des informations, cette solution n’a pas été retenue. Nous avons donc décidé de stocker les informations dans une base de données relationnelle.
+													Cette solution est moins performante que les bases de données non-relationnelles, mais ce n’est pas un problème ici étant donné le faible nombre d’utilisateurs sur la plateforme. De plus, les bases de données relationnelles ne garantissent pas l’intégrité de l’information en cas de pannes du serveur.
+													L’email est la clé primaire de la base de donnée. Celle-ci étant utilisée pour l’identification de l’utilisateur, elle doit être unique. Elle est également utilisée dans l’url des profils des différents utilisateurs, qui doit également être unique. Celle-ci est donc apparue comme la clé primaire évidente de la table, permettant ainsi d’identifier une ligne, et donc un utilisateur du site.
+
+													Accès à la base de données
+													Le toolkit SQLAlchemy permet de générer des bases de données relationnelles, de les modifier, et d’y accéder à l’aide de requêtes SQL en Python. L’utilisation de SQLAlchemy vue en TD n’était pas possible dans notre cas car la base de donnée n’était pas accessible via les différentes routes. En revanche, le toolkit possède une extension permettant de l’utiliser en association avec Flask ce qui s’est avéré très intéressant. Nous avons donc pu utiliser des bases de données relationnelles comme souhaité.
+
+													Organisation interne : les différentes routes
+													Certaines routes affichent des pages sur lesquelles on peut naviguer:
+													<b>/</b> : page d’accueil. Si l’utilisateur est connecté, redirige sur /home, sinon, affiche une page pour s’enregistrer ou se connecter
+													<b>/home</b> : page principale sur laquelle il est possible d’effectuer des recherches et de voir la liste des résultats. Ceux-ci sont des liens vers les pages /user:<email>
+													<b>/profile</b> : affiche le profile de l’utilisateur actuellement connecté avec toutes ses informations
+													<b>/editProfile</b> :  permet de modifier les informations de l’utilisateur actuellement connecté, et de les enregistrer dans la base de donnée
+													<b>/user</b>:<email> : affiche le profil d’un autre utilisateur en récupérant ses informations dans la base de donnée grâce à l’adresse mail de celui-ci qui est contenue dans l’URL.
+
+													D’autres routes n’affichent rien, et servent uniquement à récupérer des informations. En effet, lorsque la méthode POST est utilisée par l’utilisateur (en cliquant sur un bouton), un formulaire est envoyé vers l’une de ces routes:
+													<b>/login</b> : vérifie l’authentification, puis récupère dans la base de donnée les informations de l’utilisateur grâce à son email (qui est la clé primaire de la base). Connecte l’utilisateur et redirige vers /.
+													/logout : vide la session et déconnecte l’utilisateur, puis redirige vers /.
+													<b>/signup</b> : récupère les informations lorsqu’un utilisateur s’enregistre, puis les inscrit dans la base de donnée (si l’email n’est pas déjà utilisé). Connecte l’utilisateur et redirige vers /.
+													<b>/getNewInfos</b> : récupère le formulaire envoyé par /editProfile et met à jour les informations dans la base de donnée, ainsi que dans la session. Redirige vers /profile.
+													/getSearch : récupère le formulaire envoyé par /home lorsque l’utilisateur fait une recherche, puis cherche dans la base de donnée et crée la liste des résultats correspondants. Redirige vers /home
+							</p> 
 						</div>
 						<div class="col-md-12 well">
 							<legend id="paragraphe4" class="">Conclusion</legend>
