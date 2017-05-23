@@ -28,7 +28,11 @@ def userSearch(city, country):
 	res=[]
 	global resultFound
 	from users import User
-	userList = User.query.filter(User.dest == city.upper() and User.country == country.upper())
+	if country == "":
+		userList = User.query.filter(User.dest == city.upper())
+	else:
+		userList = User.query.filter(User.dest == city.upper()).filter(User.country == country.upper())
+	print(userList)
 	resultFound=True
 
 	for u in userList:
@@ -197,6 +201,7 @@ def getSearch():
 	userList = []
 	search_dest = escape(request.form['search_dest'])
 	search_country = escape(request.form['search_country'])
+	print("============== search_country :", search_country)
 	#on appelle userSearch soit avec juste la dest, soit avec dest puis country
 	userList = userSearch(search_dest, search_country)
 
