@@ -114,6 +114,8 @@ def login():
 
 @app.route('/logout')
 def logout():
+	global userList
+	userList = []
 	session.clear()
 	return redirect('/')
 
@@ -216,7 +218,7 @@ def home():
 	if resultFound:
 		txt = "Students in " + search_dest
 		if search_country != "":
-			txt += " from "+search_country
+			txt += " ("+search_country+")"
 		txt += " :"
 	else:
 		txt=""
