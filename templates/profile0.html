@@ -62,6 +62,7 @@
 				        <ul class="nav navbar-nav">
 				            <li class="active"><a href="home">Home</a></li>
 				            <li><a href="editProfile" title="editProfile"> Edit Profile</a></li>
+				            <li><a><font color="white">{{first_name | safe}} {{last_name | safe}}</font></a></li>
 										<li>
 				        </ul>
 				        <ul class="nav navbar-nav navbar-right">
@@ -73,9 +74,6 @@
 				    </div>
 				</nav>
 		</div>
-
-		<center><h1><strong><font color="white">{{first_name | safe}} {{last_name | safe}}</font></strong></h1></center>
-
 		<div class="container"> <!-- présentation personnelle-->
 			<div class="boxLeft">
 		        <center><label><h2>Profile</h2></label></center>

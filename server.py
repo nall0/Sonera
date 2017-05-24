@@ -193,6 +193,7 @@ def getNewInfos():
 	current_user.dest=session['dest']
 	session['school'] = escape(request.form['school'])
 	current_user.school=session['school']
+	db_session.commit()
 	return redirect('/profile')
 
 @app.route('/getSearch', methods=['POST', 'GET'])
