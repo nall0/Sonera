@@ -218,7 +218,7 @@ def home():
 	if resultFound:
 		txt = "Students in " + search_dest
 		if search_country != "":
-			txt += " ("+search_country+")"
+			txt += " ("+search_country.upper()+")"
 		txt += " :"
 	else:
 		txt=""
